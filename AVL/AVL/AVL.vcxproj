@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="AVL.h" />
     <ClInclude Include="ScreenRender.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AVL.cpp" />
