@@ -26,3 +26,8 @@ ScreenRender::~ScreenRender()
 {
 
 }
+
+Vector2u ScreenRender::GetSize()
+{
+    return Vector2u(_width, _height);
+}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Window.hpp>
+#include "Vector2D.h"
 
 namespace avl
 {
@@ -14,5 +15,6 @@ namespace avl
 		ScreenRender();
 		ScreenRender(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
 		~ScreenRender();
-	};
-}
+		Vector2u GetSize();
+	}; // class ScreenRender
+} // namespace avl
