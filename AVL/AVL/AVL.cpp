@@ -17,3 +17,10 @@ Vector2u AVL::GetSize()
 {
 	return _screen_render.GetSize();
 }
+
+//TODO
+void AVL::Start() {}
+
+void AVL::OnUserCreate() {}
+
+void AVL::OnUserUpdate() {}
