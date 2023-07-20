@@ -1,21 +1,30 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
 #include "ScreenRender.h"
 #include "Vector2D.h"
+	
 
 namespace avl
 {
 	class AVL
 	{
 	private:
-		ScreenRender _window;
+		ScreenRender _screen_render;
 	public:
 		AVL();
 		~AVL();
 	public:
-		void Render(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
+		void Render(uint32_t width, uint32_t height, const sf::Color& color, uint32_t bitsPerPixel = 32);
 		Vector2u GetSize();
-		void SetColor(sf::Color color);
 	};
+
+	const sf::Color
+		RED(sf::Color::Red),
+		YELLOW(sf::Color::Yellow),
+		GREEN(sf::Color::Green),
+		CYAN(sf::Color::Cyan),
+		BLUE(sf::Color::Blue),
+		BLACK(sf::Color::Black),
+		WHITE(sf::Color::White),
+		MAGENTA(sf::Color::Magenta);
 }
