@@ -14,7 +14,7 @@ namespace avl
 		AVL();
 		~AVL();
 	public:
-		void Render(uint32_t width, uint32_t height, const sf::Color& color, std::function<void()> eventQueue, uint32_t bitsPerPixel = 32);
+		void Render(uint32_t width, uint32_t height, const sf::Color& color, uint32_t bitsPerPixel = 32);
 		Vector2u GetSize();
 	};
 

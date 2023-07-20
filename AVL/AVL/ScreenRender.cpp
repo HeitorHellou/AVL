@@ -4,7 +4,7 @@ using namespace avl;
 
 ScreenRender::ScreenRender() { }
 
-void ScreenRender::Render(uint32_t width, uint32_t height, const sf::Color& color, std::function<void()> eventQueue, uint32_t bitsPerPixel)
+void ScreenRender::Render(uint32_t width, uint32_t height, const sf::Color& color, uint32_t bitsPerPixel)
 {
     _width = width;
     _height = height;
@@ -23,8 +23,6 @@ void ScreenRender::Render(uint32_t width, uint32_t height, const sf::Color& colo
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 _window->close(); // Use _window instead of window here
-
-            eventQueue();
         }
     }
 }
@@ -37,9 +35,4 @@ ScreenRender::~ScreenRender()
 Vector2u ScreenRender::GetSize()
 {
     return Vector2u(_width, _height);
-}
-
-void ScreenRender::EventQueue() 
-{
-
 }
