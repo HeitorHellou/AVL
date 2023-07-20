@@ -19,5 +19,6 @@ namespace avl
 		Vector2u GetSize();
 		void Clear(const sf::Color& color);
 		void Display();
+		void SetTitle(const std::string& title);
 	}; // class ScreenRender
 } // namespace avl
