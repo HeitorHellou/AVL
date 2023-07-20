@@ -11,7 +11,7 @@ namespace avl
 		T _x;
 		T _y;
 	public:
-		Vector2D();
+		Vector2D() {}
 		Vector2D(T x, T y) : _x{ x }, _y{ y } { }
 	public:
 		friend std::ostream& operator<<(std::ostream& out, const Vector2D<T>& v) { out << "(" << v._x << ", " << v._y << ")"; return out; };

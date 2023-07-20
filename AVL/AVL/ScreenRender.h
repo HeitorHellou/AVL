@@ -14,8 +14,10 @@ namespace avl
 		std::unique_ptr<sf::RenderWindow> _window;
 	public:
 		ScreenRender();
-		void Render(uint32_t width, uint32_t height, const sf::Color& color, uint32_t bitsPerPixel = 32);
 		~ScreenRender();
+		void Render(uint32_t width, uint32_t height, const sf::Color& color, uint32_t bitsPerPixel = 32);
 		Vector2u GetSize();
+		void Clear(const sf::Color& color);
+		void Display();
 	}; // class ScreenRender
 } // namespace avl
