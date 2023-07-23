@@ -2,7 +2,6 @@
 
 #include "ScreenRender.h"
 #include "Vector2D.h"
-	
 
 namespace avl
 {
@@ -17,8 +16,8 @@ namespace avl
 		void Render(uint32_t width, uint32_t height, const sf::Color& color, uint32_t bitsPerPixel = 32);
 		Vector2u GetSize();
 		void Start();
-		void OnUserCreate();
-		void OnUserUpdate();
+		virtual void OnUserCreate();
+		virtual void OnUserUpdate();
 	};
 
 	const sf::Color

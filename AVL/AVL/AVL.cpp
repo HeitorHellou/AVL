@@ -19,7 +19,27 @@ Vector2u AVL::GetSize()
 }
 
 //TODO
-void AVL::Start() {}
+void AVL::Start() 
+{
+    OnUserCreate();
+
+    // run the program as long as the window is open
+    while (_screen_render._window->isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (_screen_render._window->pollEvent(event)) // Use _window instead of window here
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
+                _screen_render._window->close(); // Use _window instead of window here
+        }
+
+        OnUserUpdate();
+
+        _screen_render._window->display();
+    }
+}
 
 void AVL::OnUserCreate() {}
 
