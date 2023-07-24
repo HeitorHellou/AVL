@@ -10,7 +10,7 @@ class Example : public avl::AVL
 
 	virtual void OnUserUpdate() 
 	{
-		
+		Draw(300, 100, 400, 400);
 	}
 };
 

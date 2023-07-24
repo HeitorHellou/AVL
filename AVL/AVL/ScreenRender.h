@@ -11,6 +11,7 @@ namespace avl
 		uint32_t _width;
 		uint32_t _height;
 		uint32_t _bitsPerPixel;
+		sf::Color _backgroundColor;
 		std::unique_ptr<sf::RenderWindow> _window;
 	public:
 		ScreenRender();

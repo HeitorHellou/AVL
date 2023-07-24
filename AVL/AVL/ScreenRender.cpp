@@ -11,6 +11,7 @@ void ScreenRender::Render(uint32_t width, uint32_t height, const sf::Color& colo
     _width = width;
     _height = height;
     _bitsPerPixel = bitsPerPixel;
+    _backgroundColor = color;
 
     _window = std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height, bitsPerPixel), "Window");
 

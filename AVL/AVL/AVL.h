@@ -2,6 +2,7 @@
 
 #include "ScreenRender.h"
 #include "Vector2D.h"
+#include "Geometry.h"
 
 namespace avl
 {
@@ -9,6 +10,7 @@ namespace avl
 	{
 	private:
 		ScreenRender _screen_render;
+		Geometry _geometry;
 	public:
 		AVL();
 		~AVL();
@@ -18,6 +20,7 @@ namespace avl
 		void Start();
 		virtual void OnUserCreate();
 		virtual void OnUserUpdate();
+		void Draw(float width, float height, float positionX, float positionY, const sf::Color& color = sf::Color::White);
 	};
 
 	const sf::Color

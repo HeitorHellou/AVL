@@ -4,7 +4,7 @@
 
 using namespace avl;
 
-AVL::AVL() : _screen_render{} { }
+AVL::AVL() : _screen_render{}, _geometry{} { }
 
 AVL::~AVL() { }
 
@@ -18,7 +18,6 @@ Vector2u AVL::GetSize()
 	return _screen_render.GetSize();
 }
 
-//TODO
 void AVL::Start() 
 {
     OnUserCreate();
@@ -35,6 +34,9 @@ void AVL::Start()
                 _screen_render._window->close(); // Use _window instead of window here
         }
 
+        // *** deixar melhor depois ***
+        _screen_render._window->clear(_screen_render._backgroundColor);
+
         OnUserUpdate();
 
         _screen_render._window->display();
@@ -44,3 +46,13 @@ void AVL::Start()
 void AVL::OnUserCreate() {}
 
 void AVL::OnUserUpdate() {}
+
+// TODO
+void AVL::Draw(float width, float height, float positionX, float positionY, const sf::Color& color)
+{
+    auto obj = _geometry.DrawSquare(width, height, positionX, positionY, color);
+    //auto obj = _geometry.DrawCircle(50, positionX, positionY, color);
+    //auto obj = _geometry.DrawTriangle(color);
+
+    _screen_render._window->draw(obj);
+}
