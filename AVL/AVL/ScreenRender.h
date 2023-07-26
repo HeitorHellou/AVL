@@ -11,15 +11,22 @@ namespace avl
 		uint32_t _width;
 		uint32_t _height;
 		uint32_t _bitsPerPixel;
-		sf::Color _backgroundColor;
 		std::unique_ptr<sf::RenderWindow> _window;
 	public:
-		ScreenRender();
-		~ScreenRender();
-		void Render(uint32_t width, uint32_t height, const sf::Color& color, uint32_t bitsPerPixel = 32);
+		ScreenRender(); // Constructor
+		~ScreenRender(); // Destructor
+		// Creates the application window
+		void Render(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
+	public: // Utilities
+		// Returns a vector with the window size
 		Vector2u GetSize();
+		// Changes pplication background color
 		void Clear(const sf::Color& color);
+		// Displays the window
 		void Display();
+		// Set the window's title
 		void SetTitle(const std::string& title);
+		// Close the window
+		void Close();
 	}; // class ScreenRender
 } // namespace avl

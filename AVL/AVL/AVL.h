@@ -12,17 +12,25 @@ namespace avl
 		ScreenRender _screen_render;
 		Geometry _geometry;
 	public:
-		AVL();
-		~AVL();
+		AVL(); // Constructor
+		~AVL(); // Destructor
 	public:
-		void Render(uint32_t width, uint32_t height, const sf::Color& color, uint32_t bitsPerPixel = 32);
-		Vector2u GetSize();
+		// Renders the application window
+		void Render(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
 		void Start();
+	public: // User Override Interfaces
+		// Called once on application start, used to load resources
 		virtual void OnUserCreate();
+		// Called every frame
 		virtual void OnUserUpdate();
-		void Draw(float width, float height, float positionX, float positionY, const sf::Color& color = sf::Color::White);
+	public: // Utility
+		Vector2u GetSize();
+		void Clear(const sf::Color& color);
+	public: // Drawing routines
+		
 	};
 
+	// Constant color values
 	const sf::Color
 		RED(sf::Color::Red),
 		YELLOW(sf::Color::Yellow),
