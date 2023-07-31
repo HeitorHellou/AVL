@@ -11,7 +11,6 @@ class Example : public avl::AVL
 	virtual void OnUserUpdate() 
 	{
 		Clear(avl::RED);
-		Draw(300, 100, 400, 400);
 	}
 };
 
