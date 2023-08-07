@@ -52,7 +52,7 @@ namespace avl
 		void FillTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, const sf::Color& color = sf::Color::White);
 		void FillTriangle(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Vector2i& pos3, const sf::Color& color = sf::Color::White);
 		// Draw a line of text
-		void DrawString(int32_t x1, int32_t y1, const std::string& text, const sf::Color& color = sf::Color::White, uint32_t scale = 1);
+		void DrawString(int32_t x1, int32_t y1, const std::string& text, const sf::Color& color = sf::Color::White, uint32_t scale = 12);
 		void DrawString(const sf::Vector2i& pos, const sf::Color& color = sf::Color::White, uint32_t scale = 1);
 	};
 
