@@ -50,21 +50,24 @@ void AVL::Clear(const sf::Color& color)
 }
 
 // TODO
-void AVL::Draw(int32_t x, int32_t y, const sf::Color& color = sf::Color::White) { _geometry.Draw(x, y, _screen_render._window, color); }
-void AVL::Draw(const sf::Vector2i& pos, const sf::Color& color = sf::Color::White) {}
-void AVL::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const sf::Color& color = sf::Color::White) { _geometry.DrawLine(x1, y1, x2, y2, _screen_render._window, color); }
-void AVL::DrawLine(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Color& color = sf::Color::White) {}
-void AVL::DrawCircle(int32_t x, int32_t y, int32_t radius, const sf::Color& color = sf::Color::White) { _geometry.DrawCircle(x, y, radius, _screen_render._window, color); }
-void AVL::DrawCircle(const sf::Vector2i& pos, int32_t radius, const sf::Color& color = sf::Color::White) {}
-void AVL::FillCircle(int32_t x, int32_t y, int32_t radius, const sf::Color& color = sf::Color::White) { _geometry.FillCircle(x, y, radius, _screen_render._window, color); }
-void AVL::FillCircle(const sf::Vector2i& pos, int32_t radius, const sf::Color& color = sf::Color::White) {}
-void AVL::DrawRect(int32_t x, int32_t y, int32_t w, int32_t h, const sf::Color& color = sf::Color::White) { _geometry.DrawRect(x, y, w, h, _screen_render._window, color); }
-void AVL::DrawRect(const sf::Vector2i& pos, int32_t w, int32_t h, const sf::Color& color = sf::Color::White) {}
-void AVL::FillRect(int32_t x, int32_t y, int32_t w, int32_t h, const sf::Color& color = sf::Color::White) { _geometry.FillRect(x, y, w, h, _screen_render._window, color); }
-void AVL::FillRect(const sf::Vector2i& pos, int32_t w, int32_t h, const sf::Color& color = sf::Color::White) {}
-void AVL::DrawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, const sf::Color& color = sf::Color::White) { _geometry.DrawTriangle(x1, y1, x2, y2, x3, y3, _screen_render._window, color); }
-void AVL::DrawTriangle(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Vector2i& pos3, const sf::Color& color = sf::Color::White) {}
-void AVL::FillTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, const sf::Color& color = sf::Color::White) { _geometry.FillTriangle(x1, y1, x2, y2, x3, y3, _screen_render._window, color); }
-void AVL::FillTriangle(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Vector2i& pos3, const sf::Color& color = sf::Color::White) {}
-void AVL::DrawString(int32_t x1, int32_t y1, const std::string& text, const sf::Color& color = sf::Color::White, uint32_t scale = 1) {}
-void AVL::DrawString(const sf::Vector2i& pos, const sf::Color& color = sf::Color::White, uint32_t scale = 1) {}
+void AVL::Draw(int32_t x, int32_t y, const sf::Color& color) { _geometry.Draw(x, y, _screen_render._window, color); }
+void AVL::Draw(const sf::Vector2i& pos, const sf::Color& color) {}
+void AVL::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const sf::Color& color) { _geometry.DrawLine(x1, y1, x2, y2, _screen_render._window, color); }
+void AVL::DrawLine(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Color& color) {}
+void AVL::DrawCircle(int32_t x, int32_t y, int32_t radius, const sf::Color& color) { _geometry.DrawCircle(x, y, radius, _screen_render._window, color); }
+void AVL::DrawCircle(const sf::Vector2i& pos, int32_t radius, const sf::Color& color) {}
+void AVL::FillCircle(int32_t x, int32_t y, int32_t radius, const sf::Color& color) { _geometry.FillCircle(x, y, radius, _screen_render._window, color); }
+void AVL::FillCircle(const sf::Vector2i& pos, int32_t radius, const sf::Color& color) {}
+void AVL::DrawRect(int32_t x, int32_t y, int32_t w, int32_t h, const sf::Color& color) { _geometry.DrawRect(x, y, w, h, _screen_render._window, color); }
+void AVL::DrawRect(const sf::Vector2i& pos, int32_t w, int32_t h, const sf::Color& color) {}
+void AVL::FillRect(int32_t x, int32_t y, int32_t w, int32_t h, const sf::Color& color) { _geometry.FillRect(x, y, w, h, _screen_render._window, color); }
+void AVL::FillRect(const sf::Vector2i& pos, int32_t w, int32_t h, const sf::Color& color) {}
+void AVL::DrawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, const sf::Color& color) { _geometry.DrawTriangle(x1, y1, x2, y2, x3, y3, _screen_render._window, color); }
+void AVL::DrawTriangle(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Vector2i& pos3, const sf::Color& color) {}
+void AVL::FillTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, const sf::Color& color) { _geometry.FillTriangle(x1, y1, x2, y2, x3, y3, _screen_render._window, color); }
+void AVL::FillTriangle(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Vector2i& pos3, const sf::Color& color) {}
+void AVL::DrawString(int32_t x1, int32_t y1, const std::string& text, const std::string& font, const sf::Color& color, uint32_t scale)
+{
+    _geometry.DrawString(x1, y1, text, font, _screen_render._window, color, scale);
+}
+void AVL::DrawString(const sf::Vector2i& pos, const std::string& text, const std::string& font, const sf::Color& color, uint32_t scale) {}
