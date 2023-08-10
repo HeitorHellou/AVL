@@ -135,12 +135,16 @@
   <ItemGroup>
     <ClInclude Include="AVL.h" />
     <ClInclude Include="ScreenRender.h" />
+    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="TimeScale.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AVL.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="ScreenRender.cpp" />
+    <ClCompile Include="TimeScale.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
