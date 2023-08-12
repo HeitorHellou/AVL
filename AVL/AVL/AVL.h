@@ -3,11 +3,10 @@
 #include "ScreenRender.h"
 #include "Vector2D.h"
 #include "Geometry.h"
-#include "TimeScale.h"
 
 namespace avl
 {
-	class AVL : public TimeScale
+	class AVL
 	{
 	private:
 		ScreenRender _screen_render;

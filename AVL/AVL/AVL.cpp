@@ -20,8 +20,6 @@ Vector2u AVL::GetSize()
 
 void AVL::Start() 
 {
-    sf::Clock clock;
-
     OnUserCreate();
 
     // run the program as long as the window is open
@@ -35,8 +33,6 @@ void AVL::Start()
             if (event.type == sf::Event::Closed)
                 _screen_render._window->close();
         }
-
-        SetDeltaTime(clock);
 
         OnUserUpdate();
 
