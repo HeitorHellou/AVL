@@ -8,6 +8,8 @@ AVL::AVL() : _screen_render{}, _geometry{} { }
 
 AVL::~AVL() { }
 
+sf::Time frameTime;
+
 void AVL::Render(uint32_t width, uint32_t height, uint32_t bitsPerPixel)
 {
 	_screen_render.Render(width, height, bitsPerPixel);
@@ -18,29 +20,58 @@ Vector2u AVL::GetSize()
 	return _screen_render.GetSize();
 }
 
+void AVL::FramerateController(int targetFramerate = 30) {
+    frameTime = sf::seconds(1.0f / targetFramerate);
+}
+
 void AVL::Start() 
 {
     sf::Clock clock;
+
+    int frameCount = 0;
+    sf::Clock frameClock;
+    sf::Time elapsedTime = sf::Time::Zero;
 
     OnUserCreate();
 
     // run the program as long as the window is open
     while (_screen_render._window->isOpen())
     {
+        sf::Time deltaTime = frameClock.restart();
+        elapsedTime += deltaTime;
+
+
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (_screen_render._window->pollEvent(event))
         {
             // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+            if(event.type == sf::Event::Closed)
                 _screen_render._window->close();
         }
 
+
         SetDeltaTime(clock);
 
-        OnUserUpdate();
+        while (elapsedTime >= frameTime) {
+
+            OnUserUpdate();
+
+            frameCount++;
+            if (clock.getElapsedTime().asSeconds() >= 1.0f) {
+                float fps = frameCount / clock.getElapsedTime().asSeconds();
+                std::cout << "FPS: " << fps << std::endl;
+
+                frameCount = 0;
+                clock.restart();
+            }
+
+            elapsedTime -= frameTime;
+        }
 
         _screen_render.Display();
+
+        sf::sleep(frameTime - elapsedTime);
     }
 }
 

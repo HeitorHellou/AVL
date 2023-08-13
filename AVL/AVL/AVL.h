@@ -26,6 +26,7 @@ namespace avl
 		virtual void OnUserUpdate();
 	public: // Utility
 		Vector2u GetSize();
+		void FramerateController(int targetFramerate);
 		void Clear(const sf::Color& color);
 	public: // Drawing routines
 		// Draws a single pixel
