@@ -10,10 +10,20 @@ namespace avl
 		TimeScale(); // Constructor
 		~TimeScale(); // Destructor
 	private:
-		float _deltaTime;
+		sf::Time _deltaTime;
 	protected:
+		sf::Time frameTime;
+		sf::Time elapsedTime;
+		int frameCount;
+	protected:
+		void InitFrameRateController();
 		void SetDeltaTime(sf::Clock _clock);
+		void CalculateElapsedTime();
+		void ShowFps(sf::Clock _frameClock);
 	public:
-		float GetDeltaTime();
+		sf::Time GetDeltaTime();
+	public:
+		float GetDeltaTimeAsSeconds();
+		void SetFrameRate(float targetFramerate = 30);
 	};
 }

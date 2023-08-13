@@ -18,7 +18,7 @@ namespace avl
 	public:
 		// Renders the application window
 		void Render(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
-		void Start();
+		void Start(bool showFps = false);
 	public: // User Override Interfaces
 		// Called once on application start, used to load resources
 		virtual void OnUserCreate();

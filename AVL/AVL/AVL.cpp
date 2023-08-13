@@ -1,5 +1,4 @@
 #include <memory>
-
 #include "AVL.h"
 
 using namespace avl;
@@ -18,15 +17,20 @@ Vector2u AVL::GetSize()
 	return _screen_render.GetSize();
 }
 
-void AVL::Start() 
+void AVL::Start(bool showFps)
 {
-    sf::Clock clock;
+    sf::Clock globalDeltaTimeClock;
+    sf::Clock frameClock;
+    sf::Clock frameCalcClock;
 
+    InitFrameRateController();
     OnUserCreate();
 
     // run the program as long as the window is open
     while (_screen_render._window->isOpen())
     {
+        SetDeltaTime(globalDeltaTimeClock);
+
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (_screen_render._window->pollEvent(event))
@@ -36,11 +40,31 @@ void AVL::Start()
                 _screen_render._window->close();
         }
 
-        SetDeltaTime(clock);
+        //CalculateElapsedTime();
+        elapsedTime += frameCalcClock.restart();
 
-        OnUserUpdate();
+        while (elapsedTime >= frameTime)
+        {
+            OnUserUpdate();
+
+            frameCount++;
+            if (showFps)
+            {
+                //ShowFps(frameClock);
+                if (frameClock.getElapsedTime().asSeconds() >= 1.0f) {
+                    float fps = frameCount / frameClock.getElapsedTime().asSeconds();
+                    std::cout << "FPS: " << fps << std::endl;
+
+                    frameCount = 0;
+                    frameClock.restart();
+                }
+            }
+            elapsedTime -= frameTime;
+        }
 
         _screen_render.Display();
+
+        sf::sleep(frameTime - elapsedTime);
     }
 }
 
