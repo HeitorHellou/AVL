@@ -24,7 +24,7 @@ void AVL::FramerateController(int targetFramerate = 30) {
     frameTime = sf::seconds(1.0f / targetFramerate);
 }
 
-void AVL::Start() 
+void AVL::Start()
 {
     sf::Clock clock;
 
