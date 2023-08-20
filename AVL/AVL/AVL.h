@@ -7,11 +7,12 @@
 
 namespace avl
 {
-	class AVL : public TimeScale
+	class AVL
 	{
 	private:
 		ScreenRender _screen_render;
 		Geometry _geometry;
+		TimeScale _timeScale;
 	public:
 		AVL(); // Constructor
 		~AVL(); // Destructor
@@ -21,7 +22,7 @@ namespace avl
 		void Start(bool showFps = false);
 	public: // User Override Interfaces
 		// Called once on application start, used to load resources
-		virtual void OnUserCreate();
+		virtual void OnUserStart();
 		// Called every frame
 		virtual void OnUserUpdate();
 	public: // Utility
@@ -55,6 +56,10 @@ namespace avl
 		// Draw a line of text
 		void DrawString(int32_t x1, int32_t y1, const std::string& text, const std::string& font = "C:\\Windows\\Fonts\\Arial.ttf", const sf::Color& color = sf::Color::White, uint32_t scale = 12);
 		void DrawString(const sf::Vector2i& pos, const std::string& text, const std::string& font = "C:\\Windows\\Fonts\\Arial.ttf", const sf::Color& color = sf::Color::White, uint32_t scale = 12);
+		// Manage Execution time
+		sf::Time GetDeltaTime();
+		float GetDeltaTimeAsSeconds();
+		void SetFrameRate(float targetFramerate = 30);
 	};
 
 	// Constant color values
