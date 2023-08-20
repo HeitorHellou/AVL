@@ -36,14 +36,3 @@ void TimeScale::CalculateElapsedTime()
 {
 	elapsedTime += GetDeltaTime();
 }
-
-void TimeScale::ShowFps(sf::Clock _frameClock)
-{
-	if (_frameClock.getElapsedTime().asSeconds() >= 1.0f) {
-		float fps = frameCount / _frameClock.getElapsedTime().asSeconds();
-		std::cout << "FPS: " << fps << std::endl;
-
-		frameCount = 0;
-		_frameClock.restart();
-	}
-}

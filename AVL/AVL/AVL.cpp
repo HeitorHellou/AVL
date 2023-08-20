@@ -40,9 +40,9 @@ void AVL::Start(bool showFps)
                 _screen_render._window->close();
         }
 
-        //CalculateElapsedTime();
         elapsedTime += frameCalcClock.restart();
 
+        // Lock frame rate
         while (elapsedTime >= frameTime)
         {
             OnUserUpdate();
@@ -50,7 +50,6 @@ void AVL::Start(bool showFps)
             frameCount++;
             if (showFps)
             {
-                //ShowFps(frameClock);
                 if (frameClock.getElapsedTime().asSeconds() >= 1.0f) {
                     float fps = frameCount / frameClock.getElapsedTime().asSeconds();
                     std::cout << "FPS: " << fps << std::endl;

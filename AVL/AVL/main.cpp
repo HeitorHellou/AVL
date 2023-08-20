@@ -12,7 +12,7 @@ class Example : public avl::AVL
 	{
 		Clear(avl::RED);
 		DrawString(400, 400, "hello world", avl::ARIAL, avl::BLACK, 24);
-
+		
 		/*auto deltaTime = GetDeltaTimeAsSeconds();
 		std::cout << deltaTime;
 		std::cout << "\n";*/
