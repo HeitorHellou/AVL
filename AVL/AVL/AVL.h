@@ -4,6 +4,7 @@
 #include "Vector2D.h"
 #include "Geometry.h"
 #include "TimeScale.h"
+#include "InputManager.h"
 
 namespace avl
 {
@@ -13,6 +14,7 @@ namespace avl
 		ScreenRender _screen_render;
 		Geometry _geometry;
 		TimeScale _timeScale;
+		InputManager _inputManager;
 	public:
 		AVL(); // Constructor
 		~AVL(); // Destructor
