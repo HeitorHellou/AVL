@@ -11,7 +11,7 @@ namespace avl
 		Geometry();
 		~Geometry();
 	public: // Drawing utilities
-		// TODO
+	public: // Drawing utilities
 		// Draws a single pixel
 		void Draw(int32_t x, int32_t y, std::unique_ptr<sf::RenderWindow>& target, const sf::Color& color = sf::Color::White);
 		void Draw(const sf::Vector2i& pos, std::unique_ptr<sf::RenderWindow>& target, const sf::Color& color = sf::Color::White);

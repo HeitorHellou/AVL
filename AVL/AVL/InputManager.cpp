@@ -44,10 +44,7 @@ int32_t InputManager::GetMouseWheel() const
 }
 
 // Get Mouse in window space
-const avl::Vector2f& InputManager::GetMousePosition(const ScreenRender& screen) const 
-{
-
-}
+//const avl::Vector2f& InputManager::GetMousePosition(const ScreenRender& screen) const {}
 
 // Get Mouse in desktop space
-const avl::Vector2f InputManager::GetMousePosition() const {}
+//const avl::Vector2f InputManager::GetMousePosition() const {}

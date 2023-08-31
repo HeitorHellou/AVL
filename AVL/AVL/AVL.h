@@ -31,6 +31,7 @@ namespace avl
 		Vector2u GetSize();
 		void Clear(const sf::Color& color);
 	public: // Drawing routines
+		void Display();
 		// Draws a single pixel
 		void Draw(int32_t x, int32_t y, const sf::Color& color = sf::Color::White);
 		void Draw(const sf::Vector2i& pos, const sf::Color& color = sf::Color::White);

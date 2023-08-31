@@ -78,7 +78,12 @@ void AVL::Clear(const sf::Color& color)
     _screen_render.Clear(color);
 }
 
-// TODO
+
+void AVL::Display()
+{
+    _screen_render.Display();
+}
+
 void AVL::Draw(int32_t x, int32_t y, const sf::Color& color) 
 { 
     _geometry.Draw(x, y, _screen_render._window, color); 

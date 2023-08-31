@@ -66,8 +66,8 @@ namespace avl
 		// Get Mouse Wheel delta
 		int32_t GetMouseWheel() const;
 		// Get Mouse in window space
-		const avl::Vector2f& GetMousePosition(const ScreenRender& screen) const;
+		//const avl::Vector2f& GetMousePosition(const ScreenRender& screen) const;
 		// Get Mouse in desktop space
-		const avl::Vector2f GetMousePosition() const;
+		//const avl::Vector2f GetMousePosition() const;
 	};
 }
