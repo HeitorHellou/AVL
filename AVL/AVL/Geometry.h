@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Vector2D.h"
+#include "AVLExceptions.h";
 
 namespace avl 
 {
@@ -10,7 +11,6 @@ namespace avl
 	public:
 		Geometry();
 		~Geometry();
-	public: // Drawing utilities
 	public: // Drawing utilities
 		// Draws a single pixel
 		void Draw(int32_t x, int32_t y, std::unique_ptr<sf::RenderWindow>& target, const sf::Color& color = sf::Color::White);
@@ -39,5 +39,15 @@ namespace avl
 		// Draw a line of text
 		void DrawString(int32_t x1, int32_t y1, const std::string& text, const std::string& fontPath, std::unique_ptr<sf::RenderWindow>& target, const sf::Color& color = sf::Color::White, uint32_t scale = 12);
 		void DrawString(const sf::Vector2i& pos, const std::string& text, std::unique_ptr<sf::RenderWindow>& target, const std::string& fontPath, const sf::Color& color, uint32_t scale);
+	private:
+		// Basic validation for all methods
+		void BasicValidation(int32_t x, int32_t y, std::unique_ptr<sf::RenderWindow>& target);
+		void BasicValidation(int32_t x, int32_t y, uint32_t scale, std::unique_ptr<sf::RenderWindow>& target);
+		void BasicValidation(int32_t x1, int32_t y1, int32_t x2, int32_t y2, std::unique_ptr<sf::RenderWindow>& target);
+		void BasicValidation(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, std::unique_ptr<sf::RenderWindow>& target);
+		// Validation for circle methods
+		void CircleValidation(int32_t radius);
+		// Validation for rect methods
+		void RectValidation(int32_t w, int32_t h);
 	};
 }

@@ -112,13 +112,38 @@ public:
 	}
 };
 
+class Teste : public avl::AVL 
+{
+public:
+	virtual void OnUserStart()
+	{
+	}
+
+	virtual void OnUserUpdate()
+	{
+		DrawCircle(-2, 2, 4);
+	}
+};
+
 int main()
 {
-	ExampleQuicksort demo;
-
+	/*ExampleQuicksort demo;
 	demo.SetFrameRate(60);
 	demo.Render(1600, 800);
-	demo.Start(false);
+	demo.Start(false);*/
+
+	Teste teste;
+	teste.Render(800, 800);
+
+	try 
+	{
+		teste.Start();
+	}
+	catch (const std::exception& e) 
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+	
 
 	return 0;
 }
