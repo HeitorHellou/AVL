@@ -3,7 +3,7 @@
 
 using namespace avl;
 
-AVL::AVL() : _screen_render{}, _geometry{}, _timeScale{} { }
+AVL::AVL() : _screen_render{}, _geometry{}, _timeScale{}, _inputManager{} { }
 
 AVL::~AVL() { }
 
@@ -78,7 +78,6 @@ void AVL::Clear(const sf::Color& color)
     _screen_render.Clear(color);
 }
 
-
 void AVL::Display()
 {
     _screen_render.Display();
@@ -91,7 +90,7 @@ void AVL::Draw(int32_t x, int32_t y, const sf::Color& color)
 
 void AVL::Draw(const sf::Vector2i& pos, const sf::Color& color) 
 {
-
+    _geometry.Draw(pos.x, pos.y, _screen_render._window, color);
 }
 
 void AVL::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const sf::Color& color) 
@@ -101,7 +100,7 @@ void AVL::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const sf::Col
 
 void AVL::DrawLine(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Color& color) 
 {
-
+    _geometry.DrawLine(pos1.x, pos1.y, pos2.x, pos2.y, _screen_render._window, color);
 }
 
 void AVL::DrawCircle(int32_t x, int32_t y, int32_t radius, const sf::Color& color) 
@@ -111,7 +110,7 @@ void AVL::DrawCircle(int32_t x, int32_t y, int32_t radius, const sf::Color& colo
 
 void AVL::DrawCircle(const sf::Vector2i& pos, int32_t radius, const sf::Color& color) 
 {
-
+    _geometry.DrawCircle(pos.x, pos.y, radius, _screen_render._window, color);
 }
 
 void AVL::FillCircle(int32_t x, int32_t y, int32_t radius, const sf::Color& color) 
@@ -121,7 +120,7 @@ void AVL::FillCircle(int32_t x, int32_t y, int32_t radius, const sf::Color& colo
 
 void AVL::FillCircle(const sf::Vector2i& pos, int32_t radius, const sf::Color& color) 
 {
-
+    _geometry.FillCircle(pos.x, pos.y, radius, _screen_render._window, color);
 }
 
 void AVL::DrawRect(int32_t x, int32_t y, int32_t w, int32_t h, const sf::Color& color) 
@@ -131,7 +130,7 @@ void AVL::DrawRect(int32_t x, int32_t y, int32_t w, int32_t h, const sf::Color& 
 
 void AVL::DrawRect(const sf::Vector2i& pos, int32_t w, int32_t h, const sf::Color& color) 
 {
-
+    _geometry.DrawRect(pos.x, pos.y, w, h, _screen_render._window, color);
 }
 
 void AVL::FillRect(int32_t x, int32_t y, int32_t w, int32_t h, const sf::Color& color) 
@@ -141,7 +140,7 @@ void AVL::FillRect(int32_t x, int32_t y, int32_t w, int32_t h, const sf::Color& 
 
 void AVL::FillRect(const sf::Vector2i& pos, int32_t w, int32_t h, const sf::Color& color) 
 {
-
+    _geometry.FillRect(pos.x, pos.y, w, h, _screen_render._window, color);
 }
 
 void AVL::DrawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, const sf::Color& color) 
@@ -151,7 +150,7 @@ void AVL::DrawTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x
 
 void AVL::DrawTriangle(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Vector2i& pos3, const sf::Color& color) 
 {
-
+    _geometry.DrawTriangle(pos1.x, pos1.y, pos2.x, pos2.y, pos3.x, pos3.y, _screen_render._window, color);
 }
 
 void AVL::FillTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, const sf::Color& color) 
@@ -161,7 +160,7 @@ void AVL::FillTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x
 
 void AVL::FillTriangle(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Vector2i& pos3, const sf::Color& color) 
 {
-
+    _geometry.FillTriangle(pos1.x, pos1.y, pos2.x, pos2.y, pos3.x, pos3.y, _screen_render._window, color);
 }
 
 void AVL::DrawString(int32_t x1, int32_t y1, const std::string& text, const std::string& font, const sf::Color& color, uint32_t scale)
@@ -171,17 +170,19 @@ void AVL::DrawString(int32_t x1, int32_t y1, const std::string& text, const std:
 
 void AVL::DrawString(const sf::Vector2i& pos, const std::string& text, const std::string& font, const sf::Color& color, uint32_t scale) 
 {
-
+    _geometry.DrawString(pos.x, pos.y, text, font, _screen_render._window, color, scale);
 }
 
 sf::Time AVL::GetDeltaTime()
 {
     return _timeScale.GetDeltaTime();
 }
+
 float AVL::GetDeltaTimeAsSeconds() 
 {
     return _timeScale.GetDeltaTimeAsSeconds();
 }
+
 void AVL::SetFrameRate(float targetFramerate) 
 {
     _timeScale.SetFrameRate(targetFramerate);

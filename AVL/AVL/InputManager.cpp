@@ -1,6 +1,5 @@
 #include "InputManager.h"
 
-
 using namespace avl;
 
 // Get State of key
