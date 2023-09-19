@@ -29,10 +29,18 @@ void TimeScale::InitFrameRateController()
 }
 
 void TimeScale::SetFrameRate(float targetFramerate) {
+	ValidateFrameRate(targetFramerate);
 	frameTime = sf::seconds(1.0f / targetFramerate);
 }
 
 void TimeScale::CalculateElapsedTime()
 {
 	elapsedTime += GetDeltaTime();
+}
+
+void TimeScale::ValidateFrameRate(float targetFramerate)
+{
+	if (targetFramerate < 0) {
+		throw invalid_frame_rate();
+	}
 }

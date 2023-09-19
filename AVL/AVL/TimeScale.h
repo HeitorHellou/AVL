@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "AVLExceptions.h";
 
 namespace avl
 {
@@ -29,5 +30,7 @@ namespace avl
 		float GetDeltaTimeAsSeconds();
 		// Set target frame rate
 		void SetFrameRate(float targetFramerate = 30);
+	private:
+		void ValidateFrameRate(float targetFramerate);
 	};
 }

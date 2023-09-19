@@ -6,6 +6,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include "Vector2D.h"
 #include "ScreenRender.h"
+#include "AVLExceptions.h";
 
 namespace avl
 {
@@ -69,5 +70,9 @@ namespace avl
 		//const avl::Vector2f& GetMousePosition(const ScreenRender& screen) const;
 		// Get Mouse in desktop space
 		//const avl::Vector2f GetMousePosition() const;
+	private:
+		void ValidateKey(Key k) const;
+		void ValidateMouseButton(uint32_t b) const;
+		void ValidateMouseWheelDelta(int32_t delta) const;
 	};
 }

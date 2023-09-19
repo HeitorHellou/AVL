@@ -37,3 +37,31 @@ public:
         return "Invalid scale value. The scale value must be positive, greater than zero and less than 50.";
     }
 };
+
+class invalid_key : public std::exception {
+public:
+    const char* what() const throw() {
+        return "Invalid key pressed. The key must be greater than zero, and less than 97.";
+    }
+};
+
+class invalid_mouse_button : public std::exception {
+public:
+    const char* what() const throw() {
+        return "Invalid mouse button pressed. The mouse button must be greater than zero, and less than 2.";
+    }
+};
+
+class invalid_mouse_delta : public std::exception {
+public:
+    const char* what() const throw() {
+        return "Invalid wheel delta value. The wheel delta was not in the value.";
+    }
+};
+
+class invalid_frame_rate : public std::exception {
+public:
+    const char* what() const throw() {
+        return "Invalid framerate value. The framerate value must be greater than zero.";
+    }
+};
