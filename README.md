@@ -17,7 +17,8 @@
 </div>
 
 ## About the Project
-
+<!-- LEO explicar aqui oq o nosso projeto é e o objetivo dele ser criado, da uma olhada no nosso doc do tcc pra fazer essa parte. DA PRA DEIXAR UM PARAGRAFO PARA CADA PARTE AQUI  -->
+<!-- LEO explicar aqui oq o nosso projeto faz, tipo ele desenha..., ele recebe input do usuario...  -->
 Full description here.
 
 ## Built With
@@ -147,9 +148,217 @@ Follow the steps below to install and setup SFML 2.5.1 in your local environment
 Result:
 ![image](https://github.com/HeitorHellou/AVL/assets/61805977/c74e0f78-30d9-49be-9cf1-a7c4124dab08)
 
+### Visual Studio Project Configuration
+
+Update your project .vcxproj file with the following:
+```
+  <ItemGroup>
+    <ClInclude Include="AVL.h" />
+    <ClInclude Include="AVLExceptions.h" />
+    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="TimeScale.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="ScreenRender.h" />
+    <ClInclude Include="Vector2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AVL.cpp" />
+    <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ScreenRender.cpp" />
+    <ClCompile Include="TimeScale.cpp" />
+  </ItemGroup>
+```
+Update your project .vcxproj.filters with the following:
+```
+<ItemGroup>
+    <ClInclude Include="AVL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenRender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeScale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AVlExceptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenRender.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AVL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeScale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+```
+
 ## Usage
 
-How this project should be used. This topic is like a demo.
+<ol>
+  <li>Include the header file "AVL.h" from a source file</li>
+  <li>Derive a sub-class from avl::AVL</li>
+  <li>Optionally override the OnUserStart() method</li>
+  <li>Override the OnUserUpdate() method</li>
+  <li>Create a instance of your derived class, typically on main</li>
+  <li>Call the Render() method and specify the screen dimensions</li>
+  <li>Call the Start() method to run your application</li>
+</ol>
+
+### Example AVL "QuickSort"
+
+```sh
+class ExampleQuicksort : public avl::AVL
+{
+private:
+	std::vector<int> arr;  // The array to be sorted
+	int margin;            // Margin around the bars
+	int spacing;           // Spacing between the bars
+	bool sortingComplete;  // Flag to track if sorting is complete
+
+private:
+	int partition(std::vector<int>& arr, int low, int high)
+	{
+		int pivotIndex = (low + high) / 2;
+		int pivot = arr[pivotIndex];
+		int i = low;
+		int j = high;
+
+		drawArray(pivotIndex, i, j, false);
+
+		while (true)
+		{
+			if (arr[i] <= pivot)
+				i++;
+			if (arr[j] >= pivot)
+				j--;
+
+			if (i >= j) 
+				return j;
+			
+			drawArray(pivotIndex, i, j, false);
+
+			if (arr[i] >= pivot && arr[j] <= pivot) 
+			{
+				drawArray(pivotIndex, i, j, true);
+				std::swap(arr[i], arr[j]);
+				pivotIndex = (pivotIndex == i) ? j : (pivotIndex == j) ? i : pivotIndex;
+			}
+
+		}
+	}
+
+	void drawArray(int pivotIndex, int lowIndex, int highIndex, bool toChange)
+	{
+		// Draw the bars with colors
+		Clear(avl::BLACK);
+
+		int maxElement = *std::max_element(arr.begin(), arr.end());
+		int barWidth = (screenWidth - 2 * margin - (arr.size() - 1) * spacing) / arr.size();
+		float scaleFactor = static_cast<float>(screenHeight - 2 * margin) / static_cast<float>(maxElement);
+
+		for (size_t k = 0; k < arr.size(); ++k)
+		{
+			int barHeight = static_cast<int>(arr[k] * scaleFactor);
+			int x = margin + k * (barWidth + spacing);
+			int y = screenHeight - margin - barHeight;
+
+			sf::Color barColor = avl::WHITE;
+			if (static_cast<int>(k) == pivotIndex)
+			{
+				barColor = avl::GREEN;  // Highlight pivot in green
+			}
+			else if (static_cast<int>(k) == lowIndex)
+			{
+				barColor = (toChange) ? avl::RED : avl::BLUE; // Highlight left index in blue
+			}
+			else if (static_cast<int>(k) == highIndex)
+			{
+				barColor = (toChange) ? avl::RED : avl::YELLOW; // Highlight right index in yellow
+			}
+
+			FillRect(x, y, barWidth, barHeight, barColor);
+		}
+		Display();
+
+		// Add a delay of 3 seconds for visualization
+		sf::sleep(sf::seconds(1.0f));
+	}
+
+	void quicksort(std::vector<int>& arr, int low, int high)
+	{
+		if (low < high) {
+			int pivotIndex = partition(arr, low, high);
+
+			quicksort(arr, low, pivotIndex);
+			quicksort(arr, pivotIndex + 1, high);
+		}
+		else 
+			sortingComplete = true;  // Set the flag to true when sorting is complete
+	}
+
+public:
+	virtual void OnUserStart()
+	{
+		arr = { 10, 7, 4, 3, 6, 2, 8, 9, 1, 5 };
+		margin = 10;
+		spacing = 2;
+	}
+
+	virtual void OnUserUpdate()
+	{
+		if (!sortingComplete)
+			quicksort(arr, 0, arr.size() - 1);  // Start the quicksort algorithm
+		else
+		{
+			// Draw the bars with colors
+			Clear(avl::BLACK);
+
+			int maxElement = *std::max_element(arr.begin(), arr.end());
+			int barWidth = (screenWidth - 2 * margin - (arr.size() - 1) * spacing) / arr.size();
+			float scaleFactor = static_cast<float>(screenHeight - 2 * margin) / static_cast<float>(maxElement);
+
+			for (size_t k = 0; k < arr.size(); ++k)
+			{
+				int barHeight = static_cast<int>(arr[k] * scaleFactor);
+				int x = margin + k * (barWidth + spacing);
+				int y = screenHeight - margin - barHeight;
+
+				sf::Color barColor = avl::GREEN;
+
+				FillRect(x, y, barWidth, barHeight, barColor);
+			}
+			Display();
+
+			// Add a delay of 3 seconds for visualization
+			sf::sleep(sf::seconds(1.0f));
+		}
+	}
+};
+   ```
 
 ## License
 
