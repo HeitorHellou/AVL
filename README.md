@@ -17,9 +17,10 @@
 </div>
 
 ## About the Project
-<!-- LEO explicar aqui oq o nosso projeto é e o objetivo dele ser criado, da uma olhada no nosso doc do tcc pra fazer essa parte. DA PRA DEIXAR UM PARAGRAFO PARA CADA PARTE AQUI  -->
-<!-- LEO explicar aqui oq o nosso projeto faz, tipo ele desenha..., ele recebe input do usuario...  -->
-Full description here.
+Our project consists of a library that generates graphical visualizations of algorithms. This tool provides support to users who have difficulties in understanding the dynamics of algorithms or who wish to streamline the error correction process during debugging their code.
+The main goal of this project is to implement a library aimed at visualizing the behavior of an algorithm, providing users with the necessary tools to engage directly with the visualizations. The library  allow users to observe the step-by-step execution of algorithms in real-time and visualize the data structures and other elements involved in the algorithms. This  provide users with a more intuitive and practical approach to learning algorithms.
+
+The code has been developed with the capability to efficiently and flexibly draw geometric shapes. By utilizing the abstraction layer for SFML, developers can easily incorporate geometric drawing functionalities into their projects. This functionality not only simplifies the creation of visual representations for algorithms but also allows for complete customization of shapes, including colors, sizes, and positioning. With this feature integrated into the project, the code provides developers with a powerful tool for creating dynamic and interactive graphical visualizations of their algorithms, writing text graphically on the graphics window, and managing application timing during real-time execution. Additionally, the solution effectively handles various user inputs, making interaction with the algorithms an intuitive and interactive experience.
 
 ## Built With
 
