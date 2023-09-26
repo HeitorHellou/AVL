@@ -59,6 +59,17 @@ namespace avl
 		// Draw a line of text
 		void DrawString(int32_t x1, int32_t y1, const std::string& text, const std::string& font = "C:\\Windows\\Fonts\\Arial.ttf", const sf::Color& color = sf::Color::White, uint32_t scale = 12);
 		void DrawString(const sf::Vector2i& pos, const std::string& text, const std::string& font = "C:\\Windows\\Fonts\\Arial.ttf", const sf::Color& color = sf::Color::White, uint32_t scale = 12);
+		// Draw array (heitor)
+		void DrawArray();
+		// Draw queue (leo)
+		void DrawQueue();
+		// Draw Stack (leo)
+		void DrawStack();
+		// Draw Tree (othon)
+		void DrawTree();
+		// Draw Graph (marco)
+		void DrawGraph();
+	public: // Time management
 		// Manage Execution time
 		sf::Time GetDeltaTime();
 		float GetDeltaTimeAsSeconds();

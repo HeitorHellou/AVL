@@ -40,7 +40,6 @@ private:
 				std::swap(arr[i], arr[j]);
 				pivotIndex = (pivotIndex == i) ? j : (pivotIndex == j) ? i : pivotIndex;
 			}
-
 		}
 	}
 
