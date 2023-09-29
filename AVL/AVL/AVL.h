@@ -56,9 +56,12 @@ namespace avl
 		// Fills a triangle between points (x1, y1), (x2, y2), (x3, y3)
 		void FillTriangle(int32_t x1, int32_t y1, int32_t x2, int32_t y2, int32_t x3, int32_t y3, const sf::Color& color = sf::Color::White);
 		void FillTriangle(const sf::Vector2i& pos1, const sf::Vector2i& pos2, const sf::Vector2i& pos3, const sf::Color& color = sf::Color::White);
-		// Draw a line of text
+		// Draw a text
 		void DrawString(int32_t x1, int32_t y1, const std::string& text, const std::string& font = "C:\\Windows\\Fonts\\Arial.ttf", const sf::Color& color = sf::Color::White, uint32_t scale = 12);
 		void DrawString(const sf::Vector2i& pos, const std::string& text, const std::string& font = "C:\\Windows\\Fonts\\Arial.ttf", const sf::Color& color = sf::Color::White, uint32_t scale = 12);
+		// Draw a line
+		void DrawLine(float x1, float y1, float x2, float y2);
+	public: // Samples
 		// Draw array (heitor)
 		void DrawArray();
 		// Draw queue (leo)

@@ -131,11 +131,68 @@ public:
 	}
 };
 
+struct TreeNode {
+	 int data;
+	 TreeNode* left;
+	 TreeNode* right;
+};
+TreeNode* createNode(int data) {
+	 TreeNode* newNode = new TreeNode;
+	 newNode->data = data;
+	 newNode->left = newNode->right = nullptr;
+	 return newNode;
+}
+
+class Teste : public avl::AVL 
+{
+private:
+	 TreeNode* root;
+	 float horizontalSpacing;
+public:
+	 virtual void OnUserStart() 
+	 {
+		  root = createNode(1);
+		  root->left = createNode(2);
+		  root->right = createNode(3);
+		  root->left->left = createNode(4);
+		  root->left->right = createNode(5);
+
+		  horizontalSpacing = 200.0f;
+	 }
+
+	 virtual void OnUserUpdate() 
+	 {
+		  drawTree(root, 400.0f, 50.0f, horizontalSpacing);
+	 }
+
+private:
+	 void drawTree(TreeNode* root, float x, float y, float horizontalSpacing) {
+		  if (root == nullptr) {
+				return;
+		  }
+
+		  DrawCircle(x, y, 25, avl::BLUE);
+		  DrawString(x + 20, y + 12, std::to_string(root->data), avl::ARIAL, avl::WHITE, 20);
+
+		  if (root->left != nullptr) {
+
+				DrawLine(x + 25, y + 50, x - horizontalSpacing, y + 100);
+				drawTree(root->left, x - horizontalSpacing, y + 100, horizontalSpacing / 2);
+		  }
+
+		  if (root->right != nullptr) {
+
+				DrawLine(x + 25, y + 50, x + horizontalSpacing, y + 100);
+				drawTree(root->right, x + horizontalSpacing, y + 100, horizontalSpacing / 2);
+		  }
+	 }
+};
+
 int main()
 {
-	ExampleQuicksort demo;
+	Teste demo;
 	demo.SetFrameRate(60);
-	demo.Render(1600, 800);
+	demo.Render(800, 600);
 	demo.Start(false);
 	
 

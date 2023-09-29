@@ -173,6 +173,11 @@ void AVL::DrawString(const sf::Vector2i& pos, const std::string& text, const std
     _geometry.DrawString(pos.x, pos.y, text, font, _screen_render._window, color, scale);
 }
 
+void AVL::DrawLine(float x1, float y1, float x2, float y2)
+{
+    _geometry.DrawLine(x1, y1, x2, y2, _screen_render._window);
+}
+
 sf::Time AVL::GetDeltaTime()
 {
     return _timeScale.GetDeltaTime();
@@ -186,4 +191,9 @@ float AVL::GetDeltaTimeAsSeconds()
 void AVL::SetFrameRate(float targetFramerate) 
 {
     _timeScale.SetFrameRate(targetFramerate);
+}
+
+void AVL::DrawTree() 
+{
+    
 }

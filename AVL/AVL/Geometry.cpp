@@ -272,6 +272,16 @@ void Geometry::DrawString(const sf::Vector2i& pos, const std::string& text, std:
 	target->draw(_text);
 }
 
+void Geometry::DrawLine(float x1, float y1, float x2, float y2, std::unique_ptr<sf::RenderWindow>& target)
+{
+	 sf::Vertex lines[] = {
+		  sf::Vertex(sf::Vector2f(x1, y1)),
+		  sf::Vertex(sf::Vector2f(x2, y2))
+	 };
+
+	 target->draw(lines, sizeof(lines), sf::Lines);
+}
+
 // VALIDATIONS METHODS
 void Geometry::BasicValidation(int32_t x, int32_t y, std::unique_ptr<sf::RenderWindow>& target)
 {
