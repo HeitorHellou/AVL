@@ -188,13 +188,88 @@ private:
 	 }
 };
 
+
+struct Edge {
+	int startNode;
+	int endNode;
+};
+
+struct Node
+{
+	float x;
+	float y;
+	int value;  // Value associated with the node
+};
+
+class GraphTest : public avl::AVL
+{
+private:
+	std::vector<Edge> edges;
+	std::vector<Node> nodes;
+public:
+	virtual void OnUserStart()
+	{
+		nodes = {
+			//column, line, value
+			{100.0f, 100.0f, 10}, // Node 0
+			{200.0f, 200.0f, 20}, // Node 1
+			{300.0f, 100.0f, 15}, // Node 2
+			{400.0f, 200.0f, 40}, // Node 3
+			{200.0f, 100.0f, 25}  // Node 4
+		};
+
+		// Create edges between nodes
+		edges = {
+			{0, 1}, // Edge from Node 0 to Node 1
+			{1, 2}, // Edge from Node 1 to Node 2
+			{2, 3}, // Edge from Node 2 to Node 3
+			{0, 4}, // Edge from Node 0 to Node 4
+			{0, 3}  // Edge from Node 0 to Node 3
+		};
+	}
+
+	virtual void OnUserUpdate()
+	{
+		DrawGraph(nodes, edges);
+	}
+
+private:
+	void DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges)
+	{
+		Clear(avl::BLACK);
+
+		// Draw nodes
+		float circleRadius = 20.0f;
+		for (size_t i = 0; i < nodes.size(); ++i)
+		{
+			float x = nodes[i].x - circleRadius;
+			float y = nodes[i].y - circleRadius;
+			FillCircle(x, y, circleRadius, avl::WHITE);
+
+			// Draw the value inside the circle
+			//DrawString(x - 5.0f, y - 5.0f, std::to_string(nodes[i].value), "C:\\Windows\\fonts\\Arial.ttf", avl::BLACK);
+		}
+
+		// Draw edges
+		for (const auto& edge : edges)
+		{
+			float startX = nodes[edge.startNode].x;
+			float startY = nodes[edge.startNode].y;
+			float endX = nodes[edge.endNode].x;
+			float endY = nodes[edge.endNode].y;
+			DrawLine(startX, startY, endX, endY, avl::WHITE);
+		}
+
+		Display();
+	}
+};
+
 int main()
 {
-	Teste demo;
+	GraphTest demo;
 	demo.SetFrameRate(60);
 	demo.Render(800, 600);
 	demo.Start(false);
 	
-
 	return 0;
 }
