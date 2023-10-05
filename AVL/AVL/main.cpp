@@ -1,8 +1,8 @@
 #include <iostream>
 #include "AVL.h"
 
-int screenWidth = 1600;
-int screenHeight = 800;
+int screenWidth = 800;
+int screenHeight = 600;
 
 class ExampleQuicksort : public avl::AVL
 {
@@ -131,74 +131,24 @@ public:
 	}
 };
 
-struct TreeNode {
-	 int data;
-	 TreeNode* left;
-	 TreeNode* right;
-};
-TreeNode* createNode(int data) {
-	 TreeNode* newNode = new TreeNode;
-	 newNode->data = data;
-	 newNode->left = newNode->right = nullptr;
-	 return newNode;
-}
-
-class Teste : public avl::AVL 
+class BinaryTreeTest : public avl::AVL 
 {
 private:
-	 TreeNode* root;
-	 float horizontalSpacing;
+	 PointerNode* root;
 public:
 	 virtual void OnUserStart() 
 	 {
-		  root = createNode(1);
-		  root->left = createNode(2);
-		  root->right = createNode(3);
-		  root->left->left = createNode(4);
-		  root->left->right = createNode(5);
-
-		  horizontalSpacing = 200.0f;
+		  root = CreatePointerNode(1);
+		  root->left = CreatePointerNode(2);
+		  root->right = CreatePointerNode(3);
+		  root->left->left = CreatePointerNode(4);
+		  root->left->right = CreatePointerNode(5);
 	 }
 
 	 virtual void OnUserUpdate() 
 	 {
-		  drawTree(root, 400.0f, 50.0f, horizontalSpacing);
+		  DrawTree(root, 400.0f, 100.0f, 150.0f, 100.0f);
 	 }
-
-private:
-	 void drawTree(TreeNode* root, float x, float y, float horizontalSpacing) {
-		  if (root == nullptr) {
-				return;
-		  }
-
-		  DrawCircle(x, y, 25, avl::BLUE);
-		  DrawString(x + 20, y + 12, std::to_string(root->data), avl::ARIAL, avl::WHITE, 20);
-
-		  if (root->left != nullptr) {
-
-				DrawLine(x + 25, y + 50, x - horizontalSpacing, y + 100);
-				drawTree(root->left, x - horizontalSpacing, y + 100, horizontalSpacing / 2);
-		  }
-
-		  if (root->right != nullptr) {
-
-				DrawLine(x + 25, y + 50, x + horizontalSpacing, y + 100);
-				drawTree(root->right, x + horizontalSpacing, y + 100, horizontalSpacing / 2);
-		  }
-	 }
-};
-
-
-struct Edge {
-	int startNode;
-	int endNode;
-};
-
-struct Node
-{
-	float x;
-	float y;
-	int value;  // Value associated with the node
 };
 
 class GraphTest : public avl::AVL
@@ -232,44 +182,21 @@ public:
 	{
 		DrawGraph(nodes, edges);
 	}
-
-private:
-	void DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges)
-	{
-		Clear(avl::BLACK);
-
-		// Draw nodes
-		float circleRadius = 20.0f;
-		for (size_t i = 0; i < nodes.size(); ++i)
-		{
-			float x = nodes[i].x - circleRadius;
-			float y = nodes[i].y - circleRadius;
-			FillCircle(x, y, circleRadius, avl::WHITE);
-
-			// Draw the value inside the circle
-			//DrawString(x - 5.0f, y - 5.0f, std::to_string(nodes[i].value), "C:\\Windows\\fonts\\Arial.ttf", avl::BLACK);
-		}
-
-		// Draw edges
-		for (const auto& edge : edges)
-		{
-			float startX = nodes[edge.startNode].x;
-			float startY = nodes[edge.startNode].y;
-			float endX = nodes[edge.endNode].x;
-			float endY = nodes[edge.endNode].y;
-			DrawLine(startX, startY, endX, endY, avl::WHITE);
-		}
-
-		Display();
-	}
 };
 
 int main()
 {
-	GraphTest demo;
-	demo.SetFrameRate(60);
-	demo.Render(800, 600);
-	demo.Start(false);
+	 try 
+	 {
+		  BinaryTreeTest demo;
+		  demo.SetFrameRate(60);
+		  demo.Render(screenWidth, screenHeight);
+		  demo.Start(false);
+	 }
+	 catch (const std::exception& e)
+	 {
+		  std::cout << "Exception: " << e.what() << std::endl;
+	 }
 	
 	return 0;
 }

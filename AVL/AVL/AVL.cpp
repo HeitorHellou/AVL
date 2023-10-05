@@ -193,7 +193,84 @@ void AVL::SetFrameRate(float targetFramerate)
     _timeScale.SetFrameRate(targetFramerate);
 }
 
-void AVL::DrawTree() 
+void AVL::DrawTree(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight)
 {
-    
+    Clear(avl::BLACK);
+
+    DrawTreeLines(root, x, y, horizontalSpacingLeft, horizontalSpacingRight);
+    DrawTreeNodes(root, x, y, horizontalSpacingLeft, horizontalSpacingRight);
+
+    Display();
+}
+
+void AVL::DrawTreeLines(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight)
+{
+    if (root == nullptr) {
+        return;
+    }
+
+    if (root->left != nullptr) {
+
+        DrawLine(x, y, x - horizontalSpacingLeft, y + 100);
+        DrawTreeLines(root->left, x - horizontalSpacingLeft, y + 100, horizontalSpacingLeft, horizontalSpacingRight);
+    }
+
+    if (root->right != nullptr) {
+
+        DrawLine(x, y, x + horizontalSpacingRight, y + 100);
+        DrawTreeLines(root->right, x + horizontalSpacingRight, y + 100, horizontalSpacingLeft, horizontalSpacingRight);
+    }
+}
+
+void AVL::DrawTreeNodes(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight)
+{
+    if (root == nullptr) {
+        return;
+    }
+
+    int circleRadius = 20;
+    float circleX = x - circleRadius;
+    float circleY = y - circleRadius;
+
+    FillCircle(circleX, circleY, circleRadius, avl::WHITE);
+    DrawString(x - 8, y - 10, std::to_string(root->data), avl::ARIAL, avl::RED, 20);
+
+    if (root->left != nullptr) {
+
+        DrawTreeNodes(root->left, x - horizontalSpacingLeft, y + 100, horizontalSpacingLeft, horizontalSpacingRight);
+    }
+
+    if (root->right != nullptr) {
+
+        DrawTreeNodes(root->right, x + horizontalSpacingRight, y + 100, horizontalSpacingLeft, horizontalSpacingRight);
+    }
+}
+
+void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges) 
+{
+    Clear(avl::BLACK);
+
+    // Draw edges
+    for (const auto& edge : edges)
+    {
+        float startX = nodes[edge.startNode].x;
+        float startY = nodes[edge.startNode].y;
+        float endX = nodes[edge.endNode].x;
+        float endY = nodes[edge.endNode].y;
+        DrawLine(startX, startY, endX, endY, avl::WHITE);
+    }
+
+    // Draw nodes
+    float circleRadius = 20.0f;
+    for (size_t i = 0; i < nodes.size(); ++i)
+    {
+        float x = nodes[i].x - circleRadius;
+        float y = nodes[i].y - circleRadius;
+        FillCircle(x, y, circleRadius, avl::WHITE);
+
+        // Draw the value inside the circle
+        DrawString(x + circleRadius / 2, y + circleRadius / 2, std::to_string(nodes[i].value), avl::ARIAL, avl::RED, 20);
+    }
+
+    Display();
 }

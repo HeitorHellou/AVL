@@ -5,10 +5,11 @@
 #include "Geometry.h"
 #include "TimeScale.h"
 #include "InputManager.h"
+#include "Utils.h"
 
 namespace avl
 {
-	class AVL
+	class AVL : public Utils
 	{
 	private:
 		ScreenRender _screen_render;
@@ -69,9 +70,12 @@ namespace avl
 		// Draw Stack (leo)
 		void DrawStack();
 		// Draw Tree (othon)
-		void DrawTree();
+		void DrawTree(PointerNode* root, float x, float y, float horizontalSpacingLeft = 50.0f, float horizontalSpacingRight = 50.0f);
 		// Draw Graph (marco)
-		void DrawGraph();
+		void DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges);
+	private:
+		 void DrawTreeLines(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight);
+		 void DrawTreeNodes(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight);
 	public: // Time management
 		// Manage Execution time
 		sf::Time GetDeltaTime();
