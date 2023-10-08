@@ -30,3 +30,37 @@ int Grid::GetItemSize()
 {
 	 return itemSize;
 }
+
+Coordinates Grid::SetItemPositionAnchor(int x, int y, int anchor, int itemSize)
+{
+	 switch (anchor)
+	 {
+	 case 0:
+		  return { x + (int)(itemSize * 0.5f), y + (int)(itemSize * 0.25f) };
+	 case 1:
+		  return { x + (int)(itemSize * 0.5f), y + (int)(itemSize * 0.5f) };
+	 case 2:
+		  return { x + (int)(itemSize * 0.5f), y + (int)(itemSize * 0.75f) };
+	 default:
+		  return { 0, 0 };
+	 }
+}
+
+Coordinates::Coordinates(int _x, int _y)
+{ 
+	 x = _x;
+	 y = _y;
+}
+
+Coordinates::Coordinates() { }
+Coordinates::~Coordinates() { }
+
+int Coordinates::GetX() 
+{
+	 return x;
+}
+
+int Coordinates::GetY()
+{
+	 return y;
+}

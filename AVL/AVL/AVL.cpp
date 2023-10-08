@@ -280,7 +280,7 @@ Grid AVL::CreateGrid(int screenWidth, int screenHeight, int itemSize)
     return { screenWidth, screenHeight, itemSize };
 }
 
-void AVL::ViewGrid(Grid _grid, bool viewText) 
+void AVL::ViewGrid(Grid _grid, GridItemAnchor _itemAnchor, bool viewText)
 {
     auto items = _grid.GetItems();
     int itemSize = _grid.GetItemSize();
@@ -296,6 +296,15 @@ void AVL::ViewGrid(Grid _grid, bool viewText)
         else
         {
             _geometry.DrawRect(item.positionX, item.positionY, itemSize, itemSize, _screen_render._window, avl::CYAN);
+
+            int radius = 20;
+            float circleX = item.positionX - radius;
+            float circleY = item.positionY - radius;
+
+            Coordinates coordinates =
+                _grid.SetItemPositionAnchor(circleX, circleY, (int)_itemAnchor, itemSize);
+
+            _geometry.FillCircle(coordinates.GetX(), coordinates.GetY(), 20, _screen_render._window, avl::RED);
         }
     }
 }

@@ -7,6 +7,7 @@
 #include "InputManager.h"
 #include "Utils.h"
 #include "Grid.h"
+#include "GridItemAnchor.h"
 
 namespace avl
 {
@@ -84,7 +85,7 @@ namespace avl
 		void SetFrameRate(float targetFramerate = 30);
 	public: // Screen grid
 		 Grid CreateGrid(int screenWidth, int screenHeight, int itemSize = 100);
-		 void ViewGrid(Grid _grid, bool viewText = false);
+		 void ViewGrid(Grid _grid, GridItemAnchor _itemAnchor, bool viewText = false);
 	};
 
 	// Constant color values

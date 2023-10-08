@@ -1,8 +1,8 @@
 #include <iostream>
 #include "AVL.h"
 
-int screenWidth = 800;
-int screenHeight = 600;
+int screenWidth = 1600;
+int screenHeight = 800;
 
 class ExampleQuicksort : public avl::AVL
 {
@@ -196,7 +196,7 @@ public:
 
 	 virtual void OnUserUpdate()
 	 {
-		  ViewGrid(grid);
+		  ViewGrid(grid, avl::Center);
 	 }
 };
 

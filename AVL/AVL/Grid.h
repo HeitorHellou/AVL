@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "GridItem.h"
+#include "Coordinates.h"
 
 namespace avl 
 {
@@ -18,5 +19,6 @@ namespace avl
 	 public:
 		  std::vector<GridItem> GetItems();
 		  int GetItemSize();
+		  Coordinates SetItemPositionAnchor(int x, int y, int anchor, int itemSize);
 	 };
 }
