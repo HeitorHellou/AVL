@@ -274,3 +274,28 @@ void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edg
 
     Display();
 }
+
+Grid AVL::CreateGrid(int screenWidth, int screenHeight, int itemSize)
+{
+    return { screenWidth, screenHeight, itemSize };
+}
+
+void AVL::ViewGrid(Grid _grid, bool viewText) 
+{
+    auto items = _grid.GetItems();
+    int itemSize = _grid.GetItemSize();
+
+    for (int i = 0; i < items.size(); i++)
+    {
+        auto& item = items.at(i);
+
+        if (viewText)
+        {
+            std::cout << "[" << i << "]" << "X: " << item.positionX << " Y: " << item.positionY << std::endl;
+        }
+        else
+        {
+            _geometry.DrawRect(item.positionX, item.positionY, itemSize, itemSize, _screen_render._window, avl::CYAN);
+        }
+    }
+}

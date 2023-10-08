@@ -6,6 +6,7 @@
 #include "TimeScale.h"
 #include "InputManager.h"
 #include "Utils.h"
+#include "Grid.h"
 
 namespace avl
 {
@@ -81,6 +82,9 @@ namespace avl
 		sf::Time GetDeltaTime();
 		float GetDeltaTimeAsSeconds();
 		void SetFrameRate(float targetFramerate = 30);
+	public: // Screen grid
+		 Grid CreateGrid(int screenWidth, int screenHeight, int itemSize = 100);
+		 void ViewGrid(Grid _grid, bool viewText = false);
 	};
 
 	// Constant color values

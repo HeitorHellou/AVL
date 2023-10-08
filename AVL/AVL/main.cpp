@@ -184,11 +184,27 @@ public:
 	}
 };
 
+class GridTest : public avl::AVL
+{
+private:
+	 avl::Grid grid;
+public:
+	 virtual void OnUserStart()
+	 {
+		  grid = CreateGrid(screenWidth, screenHeight);
+	 }
+
+	 virtual void OnUserUpdate()
+	 {
+		  ViewGrid(grid);
+	 }
+};
+
 int main()
 {
 	 try 
 	 {
-		  BinaryTreeTest demo;
+		  GridTest demo;
 		  demo.SetFrameRate(60);
 		  demo.Render(screenWidth, screenHeight);
 		  demo.Start(false);
