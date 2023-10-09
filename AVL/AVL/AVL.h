@@ -73,19 +73,22 @@ namespace avl
 		void DrawStack();
 		// Draw Tree (othon)
 		void DrawTree(PointerNode* root, float x, float y, float horizontalSpacingLeft = 50.0f, float horizontalSpacingRight = 50.0f);
+		void DrawGridTree(PointerGridNode* root, Grid _grid);
 		// Draw Graph (marco)
 		void DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges);
 	private:
 		 void DrawTreeLines(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight);
 		 void DrawTreeNodes(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight);
+		 void DrawGridTreeLines(PointerGridNode* root, Grid _grid);
+		 void DrawGridTreeNodes(PointerGridNode* root, Grid _grid);
 	public: // Time management
 		// Manage Execution time
 		sf::Time GetDeltaTime();
 		float GetDeltaTimeAsSeconds();
 		void SetFrameRate(float targetFramerate = 30);
 	public: // Screen grid
-		 Grid CreateGrid(int screenWidth, int screenHeight, int itemSize = 100);
-		 void ViewGrid(Grid _grid, GridItemAnchor _itemAnchor, bool viewText = false);
+		 Grid CreateGrid(int screenWidth, int screenHeight, GridItemAnchor _itemAnchor, int itemSize = 100);
+		 void ViewGrid(Grid _grid, bool showAnchor, bool viewText = false);
 	};
 
 	// Constant color values

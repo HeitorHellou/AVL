@@ -2,10 +2,12 @@
 
 using namespace avl;
 
-GridItem::GridItem(int x, int y) 
+GridItem::GridItem(int x, int y, int _line, int _column) 
 { 
 	 positionX = x;
 	 positionY = y;
+	 line = _line;
+	 column = _column;
 	 used = false;
 }
 

@@ -195,10 +195,17 @@ void AVL::SetFrameRate(float targetFramerate)
 
 void AVL::DrawTree(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight)
 {
-    Clear(avl::BLACK);
-
     DrawTreeLines(root, x, y, horizontalSpacingLeft, horizontalSpacingRight);
     DrawTreeNodes(root, x, y, horizontalSpacingLeft, horizontalSpacingRight);
+
+    Display();
+}
+
+void AVL::DrawGridTree(PointerGridNode* root, Grid _grid)
+{
+    int line = 0, column = _grid.GetCenterColumn();
+    DrawGridTreeLines(root, _grid);
+    DrawGridTreeNodes(root, _grid);
 
     Display();
 }
@@ -246,6 +253,62 @@ void AVL::DrawTreeNodes(PointerNode* root, float x, float y, float horizontalSpa
     }
 }
 
+void AVL::DrawGridTreeLines(PointerGridNode* root, Grid _grid)
+{
+    if (root == nullptr) {
+        return;
+    }
+
+    auto _coordinates =
+        _grid.SetItemPositionAnchor(_grid.GetColumnPosition(root->column),
+            _grid.GetLinePosition(root->line));
+
+    if (root->left != nullptr) {
+
+        auto _nextCoordinates =
+            _grid.SetItemPositionAnchor(_grid.GetColumnPosition(root->left->column),
+                _grid.GetLinePosition(root->left->line));
+
+        DrawLine(_coordinates.GetX(), _coordinates.GetY(), _nextCoordinates.GetX(), _nextCoordinates.GetY());
+        DrawGridTreeLines(root->left, _grid);
+    }
+
+    if (root->right != nullptr) {
+
+        auto _nextCoordinates =
+            _grid.SetItemPositionAnchor(_grid.GetColumnPosition(root->right->column),
+                _grid.GetLinePosition(root->right->line));
+
+        DrawLine(_coordinates.GetX(), _coordinates.GetY(), _nextCoordinates.GetX(), _nextCoordinates.GetY());
+        DrawGridTreeLines(root->right, _grid);
+    }
+}
+
+void AVL::DrawGridTreeNodes(PointerGridNode* root, Grid _grid)
+{
+    if (root == nullptr) {
+        return;
+    }
+
+    int radius = 20;
+    auto _coordinates = _grid.CalculateGridCircleCoordinates(radius, root->line, root->column);
+    FillCircle(_coordinates.GetX(), _coordinates.GetY(), radius, avl::WHITE);
+
+    int scale = 20;
+    _coordinates = _grid.CalculateGridTextCoordinates(scale, root->line, root->column);
+    DrawString(_coordinates.GetX(), _coordinates.GetY(), std::to_string(root->data), avl::ARIAL, avl::RED, scale);
+
+    if (root->left != nullptr) {
+
+        DrawGridTreeNodes(root->left, _grid);
+    }
+
+    if (root->right != nullptr) {
+
+        DrawGridTreeNodes(root->right, _grid);
+    }
+}
+
 void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges) 
 {
     Clear(avl::BLACK);
@@ -275,12 +338,12 @@ void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edg
     Display();
 }
 
-Grid AVL::CreateGrid(int screenWidth, int screenHeight, int itemSize)
+Grid AVL::CreateGrid(int screenWidth, int screenHeight, GridItemAnchor _itemAnchor, int itemSize)
 {
-    return { screenWidth, screenHeight, itemSize };
+    return { screenWidth, screenHeight, _itemAnchor, itemSize };
 }
 
-void AVL::ViewGrid(Grid _grid, GridItemAnchor _itemAnchor, bool viewText)
+void AVL::ViewGrid(Grid _grid, bool showAnchor, bool viewText)
 {
     auto items = _grid.GetItems();
     int itemSize = _grid.GetItemSize();
@@ -297,14 +360,17 @@ void AVL::ViewGrid(Grid _grid, GridItemAnchor _itemAnchor, bool viewText)
         {
             _geometry.DrawRect(item.positionX, item.positionY, itemSize, itemSize, _screen_render._window, avl::CYAN);
 
-            int radius = 20;
-            float circleX = item.positionX - radius;
-            float circleY = item.positionY - radius;
+            if (showAnchor) 
+            {
+                int radius = 20;
+                float circleX = item.positionX - radius;
+                float circleY = item.positionY - radius;
 
-            Coordinates coordinates =
-                _grid.SetItemPositionAnchor(circleX, circleY, (int)_itemAnchor, itemSize);
+                Coordinates coordinates =
+                    _grid.SetItemPositionAnchor(circleX, circleY);
 
-            _geometry.FillCircle(coordinates.GetX(), coordinates.GetY(), 20, _screen_render._window, avl::RED);
+                _geometry.FillCircle(coordinates.GetX(), coordinates.GetY(), 20, _screen_render._window, avl::RED);
+            }
         }
     }
 }

@@ -18,6 +18,15 @@ namespace avl
 				int value;
 		  };
 
+		  struct PointerGridNode
+		  {
+				int data;
+				PointerGridNode* left;
+				PointerGridNode* right;
+				int line;
+				int column;
+		  };
+
 		  struct Edge {
 				int startNode;
 				int endNode;
@@ -27,6 +36,15 @@ namespace avl
 				PointerNode* newNode = new PointerNode;
 				newNode->data = data;
 				newNode->left = newNode->right = nullptr;
+				return newNode;
+		  }
+
+		  PointerGridNode* CreatePointerGridNode(int data, int line, int column) {
+				PointerGridNode* newNode = new PointerGridNode;
+				newNode->data = data;
+				newNode->left = newNode->right = nullptr;
+				newNode->line = line;
+				newNode->column = column;
 				return newNode;
 		  }
 	 };

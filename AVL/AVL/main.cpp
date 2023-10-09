@@ -1,8 +1,8 @@
 #include <iostream>
 #include "AVL.h"
 
-int screenWidth = 1600;
-int screenHeight = 800;
+int screenWidth = 800;
+int screenHeight = 600;
 
 class ExampleQuicksort : public avl::AVL
 {
@@ -147,6 +147,7 @@ public:
 
 	 virtual void OnUserUpdate() 
 	 {
+		  Clear(avl::BLACK);
 		  DrawTree(root, 400.0f, 100.0f, 150.0f, 100.0f);
 	 }
 };
@@ -184,19 +185,29 @@ public:
 	}
 };
 
-class GridTest : public avl::AVL
+class BinaryTreeGridTest : public avl::AVL
 {
 private:
 	 avl::Grid grid;
+	 PointerGridNode* root;
 public:
 	 virtual void OnUserStart()
 	 {
-		  grid = CreateGrid(screenWidth, screenHeight);
+		  grid = CreateGrid(screenWidth, screenHeight, avl::Center);
+
+		  int center = grid.GetCenterColumn();
+		  root = CreatePointerGridNode(1, 0, center);
+		  root->left = CreatePointerGridNode(2, 1, center - 1);
+		  root->right = CreatePointerGridNode(3, 1, center + 1);
+		  root->left->left = CreatePointerGridNode(4, 2, center  - 2);
+		  root->left->right = CreatePointerGridNode(5, 2, center);
 	 }
 
 	 virtual void OnUserUpdate()
 	 {
-		  ViewGrid(grid, avl::Center);
+		  Clear(avl::BLACK);
+		  ViewGrid(grid, false);
+		  DrawGridTree(root, grid);
 	 }
 };
 
@@ -204,7 +215,7 @@ int main()
 {
 	 try 
 	 {
-		  GridTest demo;
+		  BinaryTreeGridTest demo;
 		  demo.SetFrameRate(60);
 		  demo.Render(screenWidth, screenHeight);
 		  demo.Start(false);
