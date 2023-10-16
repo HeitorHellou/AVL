@@ -1,5 +1,7 @@
 #include <iostream>
 #include "AVL.h"
+#include <queue>
+#include <stack>
 
 int screenWidth = 800;
 int screenHeight = 600;
@@ -211,11 +213,66 @@ public:
 	 }
 };
 
+class ExampleQueueAlgorithm : public avl::AVL
+{
+private:
+	std::queue<int> queue;  // The queue to be visualized
+	int frontIndex;         // Front index of the queue
+	int rearIndex;          // Rear index of the queue
+
+public:
+	virtual void OnUserStart()
+	{
+		// Initialize the queue with some values
+		queue.push(1);
+		queue.push(2);
+		queue.push(3);
+		queue.push(4);
+		queue.push(5);
+
+		frontIndex = 0;
+		rearIndex = queue.size() - 1;
+	}
+
+	virtual void OnUserUpdate()
+	{
+		DrawQueue(queue);
+	}
+};
+
+class ExampleStackAlgorithm : public avl::AVL
+{
+private:
+	std::stack<int> stack;  // The queue to be visualized
+	int frontIndex;         // Front index of the queue
+	int rearIndex;          // Rear index of the queue
+
+public:
+	virtual void OnUserStart()
+	{
+		// Initialize the queue with some values
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+		stack.push(4);
+		stack.push(5);
+
+		frontIndex = 0;
+		rearIndex = stack.size() - 1;
+	}
+
+	virtual void OnUserUpdate()
+	{
+		DrawStack(stack);
+	}
+};
+
 int main()
 {
 	 try 
 	 {
-		  BinaryTreeGridTest demo;
+		  ExampleQueueAlgorithm demo;
+		  //ExampleStackAlgorithm demo;
 		  demo.SetFrameRate(60);
 		  demo.Render(screenWidth, screenHeight);
 		  demo.Start(false);

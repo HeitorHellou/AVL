@@ -1,5 +1,7 @@
 #include <memory>
 #include "AVL.h"
+#include <queue>
+#include <stack>
 
 using namespace avl;
 
@@ -191,6 +193,77 @@ float AVL::GetDeltaTimeAsSeconds()
 void AVL::SetFrameRate(float targetFramerate) 
 {
     _timeScale.SetFrameRate(targetFramerate);
+}
+
+void AVL::DrawQueue(const std::queue<int>& q)
+{
+    Clear(avl::BLACK);
+
+    int queueSize = q.size();
+    int squareSize = 50;
+    float scaleFactor = static_cast<float>(600 - 2) / static_cast<float>(queueSize);
+    int midScreen = (q.size() * squareSize + 10) / 2;
+
+    int x = 400 - squareSize / 2;
+    int y = 300 - midScreen;
+
+    std::queue<int> tempQueue = q;
+
+    for (int k = 0; !tempQueue.empty(); ++k)
+    {
+        int frontValue = tempQueue.front();
+        tempQueue.pop();
+
+        sf::Color squareColor = avl::BLUE;
+        if (k == queueSize) {
+            sf::Color squareColor = avl::RED;
+        }
+
+        FillRect(x, y, squareSize, squareSize, squareColor);
+
+        DrawString(x + squareSize / 2 - 10, y - squareSize / 2, std::to_string(frontValue), avl::ARIAL, avl::WHITE, 20);
+
+        y += squareSize + 10;
+
+    }
+
+    Display();
+
+}
+
+void AVL::DrawStack(const std::stack<int>& s)
+{
+    Clear(avl::BLACK);
+
+    int stackSize = s.size();
+    int squareSize = 50;
+    int midScreen = (s.size() * squareSize + 10) / 2;
+
+    int x = 400 - squareSize / 2;
+    int y = 300 - midScreen;
+
+    std::stack<int> tempStack = s;
+
+    for (int k = 0; !tempStack.empty(); ++k)
+    {
+        int frontValue = tempStack.top();
+        tempStack.pop();
+
+        sf::Color squareColor = avl::BLUE;
+        if (k == 0) {
+            sf::Color squareColor = avl::RED;
+        }
+
+        FillRect(x, y, squareSize, squareSize, squareColor);
+
+        DrawString(x + squareSize / 2 - 10, y - squareSize / 2, std::to_string(frontValue), avl::ARIAL, avl::WHITE, 20);
+
+        y += squareSize + 10;
+
+    }
+
+    Display();
+
 }
 
 void AVL::DrawTree(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight)

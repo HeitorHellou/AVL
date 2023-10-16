@@ -8,6 +8,8 @@
 #include "Utils.h"
 #include "Grid.h"
 #include "GridItemAnchor.h"
+#include <queue>
+#include <stack>
 
 namespace avl
 {
@@ -68,9 +70,9 @@ namespace avl
 		// Draw array (heitor)
 		void DrawArray();
 		// Draw queue (leo)
-		void DrawQueue();
+		void DrawQueue(const std::queue<int>& q);
 		// Draw Stack (leo)
-		void DrawStack();
+		void DrawStack(const std::stack<int>& s);
 		// Draw Tree (othon)
 		void DrawTree(PointerNode* root, float x, float y, float horizontalSpacingLeft = 50.0f, float horizontalSpacingRight = 50.0f);
 		void DrawGridTree(PointerGridNode* root, Grid _grid);

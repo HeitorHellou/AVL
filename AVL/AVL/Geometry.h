@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Vector2D.h"
-#include "AVLExceptions.h";
+#include "AVLExceptions.h"
 
 namespace avl 
 {
