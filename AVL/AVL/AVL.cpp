@@ -266,17 +266,31 @@ void AVL::DrawStack(const std::stack<int>& s)
 
 }
 
-void AVL::DrawTree(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight)
+void AVL::DrawTree(PointerGridNode* root, Grid _grid)
 {
-    DrawTreeLines(root, x, y, horizontalSpacingLeft, horizontalSpacingRight);
-    DrawTreeNodes(root, x, y, horizontalSpacingLeft, horizontalSpacingRight);
+    int height = CalculateTreeHeight(root);
+    int row = 0, column = _grid.GetCenterColumn();
+
+    CalculateNodeGridPosition(root, row, column - 1, height);
+    DrawGridTreeLines(root, _grid);
+    DrawGridTreeNodes(root, _grid);
 
     Display();
 }
 
-void AVL::DrawGridTree(PointerGridNode* root, Grid _grid)
+void AVL::DrawTree(const std::vector<int>& nodes, Grid _grid) 
 {
-    int line = 0, column = _grid.GetCenterColumn();
+    if (nodes.size() == 0) {
+        return;
+    }
+
+    PointerGridNode* root = CreatePointerGridNode(nodes[0]);
+    ConvertToNodes(root, nodes);
+
+    int height = CalculateTreeHeight(root);
+    int row = 0, column = _grid.GetCenterColumn();
+
+    CalculateNodeGridPosition(root, row, column - 1, height);
     DrawGridTreeLines(root, _grid);
     DrawGridTreeNodes(root, _grid);
 
@@ -334,13 +348,13 @@ void AVL::DrawGridTreeLines(PointerGridNode* root, Grid _grid)
 
     auto _coordinates =
         _grid.SetItemPositionAnchor(_grid.GetColumnPosition(root->column),
-            _grid.GetLinePosition(root->line));
+            _grid.GetLinePosition(root->row));
 
     if (root->left != nullptr) {
 
         auto _nextCoordinates =
             _grid.SetItemPositionAnchor(_grid.GetColumnPosition(root->left->column),
-                _grid.GetLinePosition(root->left->line));
+                _grid.GetLinePosition(root->left->row));
 
         DrawLine(_coordinates.GetX(), _coordinates.GetY(), _nextCoordinates.GetX(), _nextCoordinates.GetY());
         DrawGridTreeLines(root->left, _grid);
@@ -350,7 +364,7 @@ void AVL::DrawGridTreeLines(PointerGridNode* root, Grid _grid)
 
         auto _nextCoordinates =
             _grid.SetItemPositionAnchor(_grid.GetColumnPosition(root->right->column),
-                _grid.GetLinePosition(root->right->line));
+                _grid.GetLinePosition(root->right->row));
 
         DrawLine(_coordinates.GetX(), _coordinates.GetY(), _nextCoordinates.GetX(), _nextCoordinates.GetY());
         DrawGridTreeLines(root->right, _grid);
@@ -364,11 +378,11 @@ void AVL::DrawGridTreeNodes(PointerGridNode* root, Grid _grid)
     }
 
     int radius = 20;
-    auto _coordinates = _grid.CalculateGridCircleCoordinates(radius, root->line, root->column);
+    auto _coordinates = _grid.CalculateGridCircleCoordinates(radius, root->row, root->column);
     FillCircle(_coordinates.GetX(), _coordinates.GetY(), radius, avl::WHITE);
 
     int scale = 20;
-    _coordinates = _grid.CalculateGridTextCoordinates(scale, root->line, root->column);
+    _coordinates = _grid.CalculateGridTextCoordinates(scale, root->row, root->column);
     DrawString(_coordinates.GetX(), _coordinates.GetY(), std::to_string(root->data), avl::ARIAL, avl::RED, scale);
 
     if (root->left != nullptr) {
@@ -380,6 +394,75 @@ void AVL::DrawGridTreeNodes(PointerGridNode* root, Grid _grid)
 
         DrawGridTreeNodes(root->right, _grid);
     }
+}
+
+int AVL::CalculateTreeHeight(PointerGridNode* root) 
+{
+    if (root == nullptr) {
+        return 0;
+    }
+
+    int leftHeight = CalculateTreeHeight(root->left);
+    int rightHeight = CalculateTreeHeight(root->right);
+    return 1 + std::max(leftHeight, rightHeight);
+}
+
+void AVL::CalculateNodeGridPosition(PointerGridNode* root, int row, int column, int treeHeight)
+{
+    if (root == nullptr) {
+        return;
+    }
+
+    int columnsGap = treeHeight / (row + 1);
+
+    root->row = row;
+    root->column = column;
+
+    if (root->left != nullptr) {
+
+        CalculateNodeGridPosition(root->left, row + 1, column - columnsGap, treeHeight);
+    }
+
+    if (root->right != nullptr) {
+
+        CalculateNodeGridPosition(root->right, row + 1, column + columnsGap, treeHeight);
+    }
+}
+
+void AVL::ConvertToNodes(PointerGridNode* root, const std::vector<int>& nodes, int index, int contador)
+{
+    if (root == nullptr) {
+        return;
+    }
+
+    int leftChild =  2 * index - 1;
+    int rightChild = 2 * index;
+
+    if (leftChild < nodes.size()) {
+        if (nodes[leftChild] != NULL) {
+            root->left = CreatePointerGridNode(nodes[leftChild]);
+            ConvertToNodes(root->left, nodes, index + 1);
+        }
+    }
+
+    if (rightChild < nodes.size()) {
+        if (nodes[rightChild] != NULL) {
+            root->right = CreatePointerGridNode(nodes[rightChild]);
+            ConvertToNodes(root->right, nodes, index + 2);
+        }
+    }
+
+    /*if (root->left != nullptr) {
+
+        ConvertToNodes(root->left, nodes, index + 1);
+    }
+
+    if (root->right != nullptr) {
+
+        ConvertToNodes(root->right, nodes, index + 1);
+    }*/
+
+    contador = index + 1;
 }
 
 void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges) 

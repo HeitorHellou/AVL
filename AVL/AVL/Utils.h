@@ -23,7 +23,7 @@ namespace avl
 				int data;
 				PointerGridNode* left;
 				PointerGridNode* right;
-				int line;
+				int row;
 				int column;
 		  };
 
@@ -39,12 +39,11 @@ namespace avl
 				return newNode;
 		  }
 
-		  PointerGridNode* CreatePointerGridNode(int data, int line, int column) {
+		  PointerGridNode* CreatePointerGridNode(int data) {
 				PointerGridNode* newNode = new PointerGridNode;
 				newNode->data = data;
 				newNode->left = newNode->right = nullptr;
-				newNode->line = line;
-				newNode->column = column;
+
 				return newNode;
 		  }
 	 };

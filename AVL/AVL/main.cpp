@@ -3,7 +3,7 @@
 #include <queue>
 #include <stack>
 
-int screenWidth = 800;
+int screenWidth = 1600;
 int screenHeight = 600;
 
 class ExampleQuicksort : public avl::AVL
@@ -133,27 +133,6 @@ public:
 	}
 };
 
-class BinaryTreeTest : public avl::AVL 
-{
-private:
-	 PointerNode* root;
-public:
-	 virtual void OnUserStart() 
-	 {
-		  root = CreatePointerNode(1);
-		  root->left = CreatePointerNode(2);
-		  root->right = CreatePointerNode(3);
-		  root->left->left = CreatePointerNode(4);
-		  root->left->right = CreatePointerNode(5);
-	 }
-
-	 virtual void OnUserUpdate() 
-	 {
-		  Clear(avl::BLACK);
-		  DrawTree(root, 400.0f, 100.0f, 150.0f, 100.0f);
-	 }
-};
-
 class GraphTest : public avl::AVL
 {
 private:
@@ -187,7 +166,7 @@ public:
 	}
 };
 
-class BinaryTreeGridTest : public avl::AVL
+class BinaryTreeLinkedGridTest : public avl::AVL
 {
 private:
 	 avl::Grid grid;
@@ -197,19 +176,52 @@ public:
 	 {
 		  grid = CreateGrid(screenWidth, screenHeight, avl::Center);
 
-		  int center = grid.GetCenterColumn();
-		  root = CreatePointerGridNode(1, 0, center);
-		  root->left = CreatePointerGridNode(2, 1, center - 1);
-		  root->right = CreatePointerGridNode(3, 1, center + 1);
-		  root->left->left = CreatePointerGridNode(4, 2, center  - 2);
-		  root->left->right = CreatePointerGridNode(5, 2, center);
+		  root = CreatePointerGridNode(1);
+		  root->left = CreatePointerGridNode(2);
+		  root->left->left = CreatePointerGridNode(3);
+		  root->left->left->left = CreatePointerGridNode(4);
+		  root->left->left->right = CreatePointerGridNode(5);
+		  root->left->right = CreatePointerGridNode(6);
+		  root->left->right->left = CreatePointerGridNode(7);
+		  root->left->right->right = CreatePointerGridNode(8);
+
+		  root->right = CreatePointerGridNode(9);
+		  root->right->left = CreatePointerGridNode(10);
+		  root->right->left->left = CreatePointerGridNode(11);
+		  root->right->left->right = CreatePointerGridNode(12);
+		  root->right->right = CreatePointerGridNode(13);
+		  root->right->right->left = CreatePointerGridNode(14);
+		  root->right->right->right = CreatePointerGridNode(15);
 	 }
 
 	 virtual void OnUserUpdate()
 	 {
 		  Clear(avl::BLACK);
 		  ViewGrid(grid, false);
-		  DrawGridTree(root, grid);
+		  DrawTree(root, grid);
+	 }
+};
+
+class BinaryTreeSequentialGridTest : public avl::AVL
+{
+private:
+	 avl::Grid grid;
+	 std::vector<int> nodes;
+public:
+	 virtual void OnUserStart()
+	 {
+		  grid = CreateGrid(screenWidth, screenHeight, avl::Center);
+
+		  nodes = {
+				1, 2, 3, 4, 5, 6, 7, NULL, NULL, 10, 11
+		  };
+	 }
+
+	 virtual void OnUserUpdate()
+	 {
+		  Clear(avl::BLACK);
+		  ViewGrid(grid, false);
+		  DrawTree(nodes, grid);
 	 }
 };
 
@@ -271,8 +283,9 @@ int main()
 {
 	 try 
 	 {
-		  ExampleQueueAlgorithm demo;
+		  //ExampleQueueAlgorithm demo;
 		  //ExampleStackAlgorithm demo;
+		  BinaryTreeSequentialGridTest demo;
 		  demo.SetFrameRate(60);
 		  demo.Render(screenWidth, screenHeight);
 		  demo.Start(false);

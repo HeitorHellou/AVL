@@ -10,7 +10,7 @@ Grid::Grid(int screenWidth, int screenHeight, GridItemAnchor _itemAnchor, int _i
 	 int lines = screenWidth / itemSize;
 	 int columns = screenHeight / itemSize;
 
-	 centerColumn = columns / 2;
+	 centerColumn = lines / 2;
 
 	 for (int i = 0; i < lines; i++)
 	 {

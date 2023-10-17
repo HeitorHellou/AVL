@@ -74,8 +74,8 @@ namespace avl
 		// Draw Stack (leo)
 		void DrawStack(const std::stack<int>& s);
 		// Draw Tree (othon)
-		void DrawTree(PointerNode* root, float x, float y, float horizontalSpacingLeft = 50.0f, float horizontalSpacingRight = 50.0f);
-		void DrawGridTree(PointerGridNode* root, Grid _grid);
+		void DrawTree(PointerGridNode* root, Grid _grid);
+		void DrawTree(const std::vector<int>& nodes, Grid _grid);
 		// Draw Graph (marco)
 		void DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges);
 	private:
@@ -83,6 +83,9 @@ namespace avl
 		 void DrawTreeNodes(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight);
 		 void DrawGridTreeLines(PointerGridNode* root, Grid _grid);
 		 void DrawGridTreeNodes(PointerGridNode* root, Grid _grid);
+		 void CalculateNodeGridPosition(PointerGridNode* root, int row, int column, int treeHeight);
+		 int CalculateTreeHeight(PointerGridNode* root);
+		 void ConvertToNodes(PointerGridNode* root, const std::vector<int>& nodes, int index = 1, int contador = 0);
 	public: // Time management
 		// Manage Execution time
 		sf::Time GetDeltaTime();
