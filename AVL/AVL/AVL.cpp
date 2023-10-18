@@ -284,8 +284,7 @@ void AVL::DrawTree(const std::vector<int>& nodes, Grid _grid)
         return;
     }
 
-    PointerGridNode* root = CreatePointerGridNode(nodes[0]);
-    ConvertToNodes(root, nodes);
+    PointerGridNode* root = ConvertToNodes(nodes);
 
     int height = CalculateTreeHeight(root);
     int row = 0, column = _grid.GetCenterColumn();
@@ -429,40 +428,44 @@ void AVL::CalculateNodeGridPosition(PointerGridNode* root, int row, int column, 
     }
 }
 
-void AVL::ConvertToNodes(PointerGridNode* root, const std::vector<int>& nodes, int index, int contador)
+Utils::PointerGridNode* AVL::ConvertToNodes(const std::vector<int>& nodes, int index)
 {
-    if (root == nullptr) {
-        return;
-    }
+    std::vector<PointerGridNode*> createdNodes;
+    for (int i = 0; i < nodes.size(); i++) {
 
-    int leftChild =  2 * index - 1;
-    int rightChild = 2 * index;
-
-    if (leftChild < nodes.size()) {
-        if (nodes[leftChild] != NULL) {
-            root->left = CreatePointerGridNode(nodes[leftChild]);
-            ConvertToNodes(root->left, nodes, index + 1);
+        if (nodes[i] == NULL) {
+            createdNodes.push_back(NULL);
+        }
+        else {
+            createdNodes.push_back(CreatePointerGridNode(nodes[i]));
         }
     }
 
-    if (rightChild < nodes.size()) {
-        if (nodes[rightChild] != NULL) {
-            root->right = CreatePointerGridNode(nodes[rightChild]);
-            ConvertToNodes(root->right, nodes, index + 2);
+    PointerGridNode* root = createdNodes[0];
+
+    for (int i = 0; i < createdNodes.size(); i++) {
+
+        if (createdNodes[i] == NULL) {
+            continue;
+        }
+
+        int leftChild = 2 * i + 1;
+        int rightChild = 2 * i + 2;
+
+        if (leftChild < createdNodes.size()) {
+            if (createdNodes[leftChild] != NULL) {
+                createdNodes[i]->left = createdNodes[leftChild];
+            }
+        }
+
+        if (rightChild < createdNodes.size()) {
+            if (createdNodes[rightChild] != NULL) {
+                createdNodes[i]->right = createdNodes[rightChild];
+            }
         }
     }
 
-    /*if (root->left != nullptr) {
-
-        ConvertToNodes(root->left, nodes, index + 1);
-    }
-
-    if (root->right != nullptr) {
-
-        ConvertToNodes(root->right, nodes, index + 1);
-    }*/
-
-    contador = index + 1;
+    return root;
 }
 
 void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges) 

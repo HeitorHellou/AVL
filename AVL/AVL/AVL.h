@@ -85,7 +85,7 @@ namespace avl
 		 void DrawGridTreeNodes(PointerGridNode* root, Grid _grid);
 		 void CalculateNodeGridPosition(PointerGridNode* root, int row, int column, int treeHeight);
 		 int CalculateTreeHeight(PointerGridNode* root);
-		 void ConvertToNodes(PointerGridNode* root, const std::vector<int>& nodes, int index = 1, int contador = 0);
+		 PointerGridNode* ConvertToNodes(const std::vector<int>& nodes, int index = 1);
 	public: // Time management
 		// Manage Execution time
 		sf::Time GetDeltaTime();

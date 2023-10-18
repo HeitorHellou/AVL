@@ -213,7 +213,7 @@ public:
 		  grid = CreateGrid(screenWidth, screenHeight, avl::Center);
 
 		  nodes = {
-				1, 2, 3, 4, 5, 6, 7, NULL, NULL, 10, 11
+				1, 2, 3, 4, 5, 6, 7, NULL, NULL, 8, 9
 		  };
 	 }
 
