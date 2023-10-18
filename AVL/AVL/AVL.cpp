@@ -202,7 +202,7 @@ void AVL::DrawQueue(const std::queue<int>& q)
     int queueSize = q.size();
     int squareSize = 50;
     float scaleFactor = static_cast<float>(600 - 2) / static_cast<float>(queueSize);
-    int midScreen = (q.size() * squareSize + 10) / 2;
+    int midScreen = (q.size() * (squareSize + 10)) / 2;
 
     int x = 400 - squareSize / 2;
     int y = 300 - midScreen;
@@ -219,9 +219,9 @@ void AVL::DrawQueue(const std::queue<int>& q)
             sf::Color squareColor = avl::RED;
         }
 
-        FillRect(x, y, squareSize, squareSize, squareColor);
+        FillRect(x - squareSize / 2, y - squareSize / 2, squareSize, squareSize, squareColor);
 
-        DrawString(x + squareSize / 2 - 10, y - squareSize / 2, std::to_string(frontValue), avl::ARIAL, avl::WHITE, 20);
+        DrawString(x, y, std::to_string(frontValue), avl::ARIAL, avl::WHITE, 20);
 
         y += squareSize + 10;
 
@@ -237,7 +237,7 @@ void AVL::DrawStack(const std::stack<int>& s)
 
     int stackSize = s.size();
     int squareSize = 50;
-    int midScreen = (s.size() * squareSize + 10) / 2;
+    int midScreen = (s.size() * (squareSize + 10)) / 2;
 
     int x = 400 - squareSize / 2;
     int y = 300 - midScreen;
@@ -254,9 +254,9 @@ void AVL::DrawStack(const std::stack<int>& s)
             sf::Color squareColor = avl::RED;
         }
 
-        FillRect(x, y, squareSize, squareSize, squareColor);
+        FillRect(x - squareSize / 2, y - squareSize / 2, squareSize, squareSize, squareColor);
 
-        DrawString(x + squareSize / 2 - 10, y - squareSize / 2, std::to_string(frontValue), avl::ARIAL, avl::WHITE, 20);
+        DrawString(x, y, std::to_string(frontValue), avl::ARIAL, avl::WHITE, 20);
 
         y += squareSize + 10;
 
