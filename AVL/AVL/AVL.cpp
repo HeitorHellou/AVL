@@ -228,7 +228,6 @@ void AVL::DrawQueue(const std::queue<int>& q)
     }
 
     Display();
-
 }
 
 void AVL::DrawStack(const std::stack<int>& s)
@@ -266,6 +265,33 @@ void AVL::DrawStack(const std::stack<int>& s)
 
 }
 
+void AVL::DrawArray(std::vector<int>& arr)
+{
+    Vector2u dimensions = GetSize();
+    auto screenWidth = dimensions._x;
+    auto screenHeight = dimensions._y;
+    int margin = 10;
+    int spacing = 2;
+
+    int maxElement = *std::max_element(arr.begin(), arr.end());
+    int barWidth = (screenWidth - 2 * margin - (arr.size() - 1) * spacing) / arr.size();
+    float scaleFactor = static_cast<float>(screenHeight - 2 * margin) / static_cast<float>(maxElement);
+
+    for (size_t k = 0; k < arr.size(); ++k)
+    {
+        int barHeight = static_cast<int>(arr[k] * scaleFactor);
+        int x = margin + k * (barWidth + spacing);
+        int y = screenHeight - margin - barHeight;
+
+        sf::Color barColor = avl::WHITE;
+
+        FillRect(x, y, barWidth, barHeight, barColor);
+    }
+    Display();
+
+    sf::sleep(sf::seconds(1.0f));
+}
+
 void AVL::DrawTree(PointerGridNode* root, Grid _grid)
 {
     int height = CalculateTreeHeight(root);
@@ -294,49 +320,6 @@ void AVL::DrawTree(const std::vector<int>& nodes, Grid _grid)
     DrawGridTreeNodes(root, _grid);
 
     Display();
-}
-
-void AVL::DrawTreeLines(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight)
-{
-    if (root == nullptr) {
-        return;
-    }
-
-    if (root->left != nullptr) {
-
-        DrawLine(x, y, x - horizontalSpacingLeft, y + 100);
-        DrawTreeLines(root->left, x - horizontalSpacingLeft, y + 100, horizontalSpacingLeft, horizontalSpacingRight);
-    }
-
-    if (root->right != nullptr) {
-
-        DrawLine(x, y, x + horizontalSpacingRight, y + 100);
-        DrawTreeLines(root->right, x + horizontalSpacingRight, y + 100, horizontalSpacingLeft, horizontalSpacingRight);
-    }
-}
-
-void AVL::DrawTreeNodes(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight)
-{
-    if (root == nullptr) {
-        return;
-    }
-
-    int circleRadius = 20;
-    float circleX = x - circleRadius;
-    float circleY = y - circleRadius;
-
-    FillCircle(circleX, circleY, circleRadius, avl::WHITE);
-    DrawString(x - 8, y - 10, std::to_string(root->data), avl::ARIAL, avl::RED, 20);
-
-    if (root->left != nullptr) {
-
-        DrawTreeNodes(root->left, x - horizontalSpacingLeft, y + 100, horizontalSpacingLeft, horizontalSpacingRight);
-    }
-
-    if (root->right != nullptr) {
-
-        DrawTreeNodes(root->right, x + horizontalSpacingRight, y + 100, horizontalSpacingLeft, horizontalSpacingRight);
-    }
 }
 
 void AVL::DrawGridTreeLines(PointerGridNode* root, Grid _grid)

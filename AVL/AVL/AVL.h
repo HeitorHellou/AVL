@@ -26,6 +26,7 @@ namespace avl
 	public:
 		// Renders the application window
 		void Render(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
+		// Starts the application and main game loop
 		void Start(bool showFps = false);
 	public: // User Override Interfaces
 		// Called once on application start, used to load resources
@@ -67,25 +68,27 @@ namespace avl
 		// Draw a line
 		void DrawLine(float x1, float y1, float x2, float y2);
 	public: // Samples
-		// Draw array (heitor)
-		void DrawArray();
-		// Draw queue (leo)
+		// Draw array
+		void DrawArray(std::vector<int>& arr);
+		// Draw queue
 		void DrawQueue(const std::queue<int>& q);
-		// Draw Stack (leo)
+		// Draw Stack
 		void DrawStack(const std::stack<int>& s);
-		// Draw Tree (othon)
+		// Draw Tree
 		void DrawTree(PointerGridNode* root, Grid _grid);
 		void DrawTree(const std::vector<int>& nodes, Grid _grid);
-		// Draw Graph (marco)
+		// Draw Graph
 		void DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges);
 	private:
-		 void DrawTreeLines(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight);
-		 void DrawTreeNodes(PointerNode* root, float x, float y, float horizontalSpacingLeft, float horizontalSpacingRight);
-		 void DrawGridTreeLines(PointerGridNode* root, Grid _grid);
-		 void DrawGridTreeNodes(PointerGridNode* root, Grid _grid);
-		 void CalculateNodeGridPosition(PointerGridNode* root, int row, int column, int treeHeight);
-		 int CalculateTreeHeight(PointerGridNode* root);
-		 PointerGridNode* ConvertToNodes(const std::vector<int>& nodes, int index = 1);
+		// Draw tree edges based on grid 	
+		void DrawGridTreeLines(PointerGridNode* root, Grid _grid);
+		// Draw tree nodes based on grid
+		void DrawGridTreeNodes(PointerGridNode* root, Grid _grid);
+		void CalculateNodeGridPosition(PointerGridNode* root, int row, int column, int treeHeight);
+		// Get tree height
+		int CalculateTreeHeight(PointerGridNode* root);
+		// 
+		PointerGridNode* ConvertToNodes(const std::vector<int>& nodes, int index = 1);
 	public: // Time management
 		// Manage Execution time
 		sf::Time GetDeltaTime();

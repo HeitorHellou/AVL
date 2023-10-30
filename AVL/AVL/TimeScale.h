@@ -30,6 +30,8 @@ namespace avl
 		float GetDeltaTimeAsSeconds();
 		// Set target frame rate
 		void SetFrameRate(float targetFramerate = 30);
+		// TODO wait()
+		void Wait(float waitMilliseconds);
 	private:
 		void ValidateFrameRate(float targetFramerate);
 	};

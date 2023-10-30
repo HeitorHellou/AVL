@@ -283,12 +283,13 @@ int main()
 {
 	 try 
 	 {
-		  //ExampleQueueAlgorithm demo;
-		  //ExampleStackAlgorithm demo;
-		  BinaryTreeSequentialGridTest demo;
-		  demo.SetFrameRate(60);
-		  demo.Render(screenWidth, screenHeight);
-		  demo.Start(false);
+		 //ExampleQueueAlgorithm demo;
+		 //ExampleStackAlgorithm demo;
+		 //BinaryTreeSequentialGridTest demo;
+		 ExampleQuicksort demo;
+		 demo.SetFrameRate(60);
+		 demo.Render(screenWidth, screenHeight);
+		 demo.Start(false);
 	 }
 	 catch (const std::exception& e)
 	 {
