@@ -39,4 +39,3 @@ void ScreenRender::Close()
 {
     _window->close();
 }
-

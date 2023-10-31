@@ -84,10 +84,11 @@ namespace avl
 		void DrawGridTreeLines(PointerGridNode* root, Grid _grid);
 		// Draw tree nodes based on grid
 		void DrawGridTreeNodes(PointerGridNode* root, Grid _grid);
+		// Calculate which row or column the node will be positioned
 		void CalculateNodeGridPosition(PointerGridNode* root, int row, int column, int treeHeight);
 		// Get tree height
 		int CalculateTreeHeight(PointerGridNode* root);
-		// 
+		// Convert nodes array to nodes pointer
 		PointerGridNode* ConvertToNodes(const std::vector<int>& nodes, int index = 1);
 	public: // Time management
 		// Manage Execution time

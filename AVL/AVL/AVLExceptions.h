@@ -3,6 +3,7 @@
 #include <iostream>
 #include <exception>
 
+// Error when the window reference is null
 class target_renderWindow_error : public std::exception {
 public:
     const char* what() const throw() {
@@ -10,6 +11,7 @@ public:
     }
 };
 
+// Error when the position (x,y) is negative
 class invalid_position : public std::exception {
 public:
     const char* what() const throw() {
@@ -17,6 +19,7 @@ public:
     }
 };
 
+// Error when the width or height are negative values
 class invalid_width_height : public std::exception {
 public:
     const char* what() const throw() {
@@ -24,6 +27,7 @@ public:
     }
 };
 
+// Error when the radius is a negative value
 class invalid_radius : public std::exception {
 public:
     const char* what() const throw() {
@@ -31,6 +35,7 @@ public:
     }
 };
 
+// Error when the scale is an invalid value
 class invalid_scale : public std::exception {
 public:
     const char* what() const throw() {
@@ -38,6 +43,7 @@ public:
     }
 };
 
+// Error when an invalid key is pressed
 class invalid_key : public std::exception {
 public:
     const char* what() const throw() {
@@ -45,6 +51,7 @@ public:
     }
 };
 
+// Error when an invalid mouse button is pressed
 class invalid_mouse_button : public std::exception {
 public:
     const char* what() const throw() {
@@ -52,6 +59,7 @@ public:
     }
 };
 
+// Error when an invalid wheel delta value is received
 class invalid_mouse_delta : public std::exception {
 public:
     const char* what() const throw() {
@@ -59,6 +67,7 @@ public:
     }
 };
 
+// Error when the framerate is a negative value
 class invalid_frame_rate : public std::exception {
 public:
     const char* what() const throw() {
