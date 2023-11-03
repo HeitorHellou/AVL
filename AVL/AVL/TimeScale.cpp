@@ -44,5 +44,13 @@ void TimeScale::ValidateFrameRate(float targetFramerate)
 		throw invalid_frame_rate();
 	}
 }
-// TODO
-void TimeScale::Wait(float waitMilliseconds) {}
+
+void TimeScale::Wait(float waitMilliseconds)
+{
+	sf::sleep(sf::milliseconds(waitMilliseconds));
+}
+
+void TimeScale::Wait(sf::Time waitMilliseconds)
+{
+	sf::sleep(waitMilliseconds);
+}

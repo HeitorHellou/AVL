@@ -78,8 +78,8 @@ private:
 		}
 		Display();
 
-		// Add a delay of 3 seconds for visualization
-		sf::sleep(sf::seconds(1.0f));
+		// Add a delay of 1 second for visualization
+		avl::TimeScale::Wait(1000);
 	}
 
 	void quicksort(std::vector<int>& arr, int low, int high)
@@ -127,8 +127,8 @@ public:
 			}
 			Display();
 
-			// Add a delay of 3 seconds for visualization
-			sf::sleep(sf::seconds(1.0f));
+			// Add a delay of 1 second for visualization
+			avl::TimeScale::Wait(1000);
 		}
 	}
 };

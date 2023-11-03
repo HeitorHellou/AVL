@@ -67,7 +67,7 @@ void AVL::Start(bool showFps)
 
         _screen_render.Display();
 
-        sf::sleep(_timeScale.frameTime - _timeScale.elapsedTime);
+        avl::TimeScale::Wait(_timeScale.frameTime - _timeScale.elapsedTime);
     }
 }
 
@@ -289,7 +289,7 @@ void AVL::DrawArray(std::vector<int>& arr)
     }
     Display();
 
-    sf::sleep(sf::seconds(1.0f));
+    avl::TimeScale::Wait(1000);
 }
 
 void AVL::DrawTree(PointerGridNode* root, Grid _grid)
