@@ -1,7 +1,5 @@
-#include <memory>
+
 #include "AVL.h"
-#include <queue>
-#include <stack>
 
 using namespace avl;
 
@@ -292,10 +290,40 @@ void AVL::DrawArray(std::vector<int>& arr)
     avl::TimeScale::Wait(1000);
 }
 
-void AVL::DrawTree(const std::shared_ptr<TreeNode>& root, int row, int col)
+void AVL::DrawTree(const std::shared_ptr<TreeNode>& root, int row, int col, int startRow, int startCol)
 {
-    
+    if (root == nullptr) {
+        return;
+    }
+
+    int middleCol = std::floor((startCol + col) / 2);
+    int x = middleCol * _grid.getCellWidth();
+    int y = startRow * _grid.getCellHeight();
+    int data = root->data;
+
+    DrawTreeNode(x, y, data);
+
+    DrawTree(root->left, row, middleCol, startRow + 1, 0);
+    //DrawTreeLine(x, y, );
+    DrawTree(root->right, row, col, startRow + 1, middleCol + 1);
+    //DrawTreeLine(x, y, );
 }
+
+void AVL::DrawTreeNode(int x, int y, int data)
+{
+    FillCircle(x, y, 20, avl::WHITE);
+    DrawString(x, y, std::to_string(data), avl::ARIAL, avl::RED, 20);
+}
+
+//void AVL::DrawTreeLine(const std::shared_ptr<TreeNode>& root, int x1, int y1, int x2, int y2)
+//{
+//    if (root == nullptr) {
+//        return;
+//    }
+//
+//    DrawLine(x1, y1, x2, y2);
+//}
+
 
 void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges) 
 {

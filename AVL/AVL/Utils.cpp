@@ -21,3 +21,13 @@ void Grid::setGrid(uint32_t width, uint32_t height, int treeHeight)
     _columns = pow(treeHeight, 2) - 1;
     _rows = treeHeight;
 }
+
+int Grid::getCellWidth() 
+{
+    return _cellWidth;
+}
+
+int Grid::getCellHeight() 
+{
+    return _cellHeight;
+}

@@ -1,13 +1,16 @@
 #pragma once
 
+#include <queue>
+#include <stack>
+#include <memory>
+#include <cmath>
+
 #include "ScreenRender.h"
 #include "Vector2D.h"
 #include "Geometry.h"
 #include "TimeScale.h"
 #include "InputManager.h"
 #include "Utils.h"
-#include <queue>
-#include <stack>
 
 namespace avl
 {
@@ -74,9 +77,12 @@ namespace avl
 		// Draw Stack
 		void DrawStack(const std::stack<int>& s);
 		// Draw Tree based on number of desired rows and columns
-		void DrawTree(const std::shared_ptr<TreeNode>& root, int row, int col);
+		void DrawTree(const std::shared_ptr<TreeNode>& root, int row, int col, int startRow = 0, int startCol = 0);
 		// Draw Graph
 		void DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges);
+	private: // Samples Utils
+		void DrawTreeNode(int x, int y, int data);
+		void DrawTreeLine(int x1, int y1, int x2, int y2);
 	public: // Time management
 		// Manage Execution time
 		sf::Time GetDeltaTime();

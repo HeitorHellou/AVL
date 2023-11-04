@@ -178,16 +178,16 @@ private:
 
 	std::shared_ptr<TreeNode> insertRecursive(std::shared_ptr<TreeNode> current, int value)
 	{
-		if (current == nullptr) 
+		if (current == nullptr)
 		{
-			return std::make_shared<TreeNode>(value);
+			return std::make_shared<TreeNode>(TreeNode{ value, nullptr, nullptr });
 		}
 
-		if (value < current->data) 
+		if (value < current->data)
 		{
 			current->left = insertRecursive(current->left, value);
 		}
-		else if (value > current->data) 
+		else if (value > current->data)
 		{
 			current->right = insertRecursive(current->right, value);
 		}
@@ -204,6 +204,23 @@ private:
 		int rightHeight = getHeight(root->right);
 
 		return std::max(leftHeight, rightHeight) + 1;
+	}
+
+	virtual void OnUserStart()
+	{
+		addNode(5);
+		addNode(3);
+		addNode(2);
+		addNode(4);
+		addNode(1);
+		addNode(6);
+
+		CreateGrid(12, 12);
+	}
+
+	virtual void OnUserUpdate()
+	{
+		DrawTree(root, 12, 12);
 	}
 };
 
@@ -268,7 +285,7 @@ int main()
 		 //ExampleQueueAlgorithm demo;
 		 //ExampleStackAlgorithm demo;
 		 //BinaryTreeSequentialGridTest demo;
-		 ExampleQuicksort demo;
+		 ExampleBinaryTree demo;
 		 demo.SetFrameRate(60);
 		 demo.Render(screenWidth, screenHeight);
 		 demo.Start(false);

@@ -43,5 +43,9 @@ namespace avl
 		 void setGrid(uint32_t width, uint32_t height, int row, int col);
 		 // Creates a grid based on screen size and height of the tree
 		 void setGrid(uint32_t width, uint32_t height, int treeHeight);
+		 // Get current cell width
+		 int getCellWidth();
+		 // Get current cell height
+		 int getCellHeight();
 	 };
 }
