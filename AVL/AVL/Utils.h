@@ -1,50 +1,47 @@
 #pragma once
 
+#include <memory>
+
 namespace avl 
 {
-	 class Utils 
+	 class Structs
 	 {
 	 public:
-		  struct PointerNode {
-				int data;
-				PointerNode* left;
-				PointerNode* right;
-		  };
+		 // Graph
+		 struct Node
+		 {
+			 float x;
+			 float y;
+			 int value;
+		 };
 
-		  struct Node
-		  {
-				float x;
-				float y;
-				int value;
-		  };
+		 struct Edge 
+		 {
+			 int startNode;
+			 int endNode;
+		 };
 
-		  struct PointerGridNode
-		  {
-				int data;
-				PointerGridNode* left;
-				PointerGridNode* right;
-				int row;
-				int column;
-		  };
+		 // Tree
+		 struct TreeNode
+		 {
+			 int data;
+			 std::shared_ptr<TreeNode> left;
+			 std::shared_ptr<TreeNode> right;
+		 };
+	 };
 
-		  struct Edge {
-				int startNode;
-				int endNode;
-		  };
-
-		  PointerNode* CreatePointerNode(int data) {
-				PointerNode* newNode = new PointerNode;
-				newNode->data = data;
-				newNode->left = newNode->right = nullptr;
-				return newNode;
-		  }
-
-		  PointerGridNode* CreatePointerGridNode(int data) {
-				PointerGridNode* newNode = new PointerGridNode;
-				newNode->data = data;
-				newNode->left = newNode->right = nullptr;
-
-				return newNode;
-		  }
+	 class Grid
+	 {
+	 private:
+		 int _rows;
+		 int _columns;
+		 int _cellWidth;
+		 int _cellHeight;
+	 public:
+		 Grid();
+		 // Creates a grid based on screen size and number of desired rows/columns
+		 void setGrid(uint32_t width, uint32_t height, int row, int col);
+		 // Creates a grid based on screen size and height of the tree
+		 void setGrid(uint32_t width, uint32_t height, int treeHeight);
 	 };
 }

@@ -6,20 +6,19 @@
 #include "TimeScale.h"
 #include "InputManager.h"
 #include "Utils.h"
-#include "Grid.h"
-#include "GridItemAnchor.h"
 #include <queue>
 #include <stack>
 
 namespace avl
 {
-	class AVL : public Utils
+	class AVL : public Structs
 	{
 	private:
 		ScreenRender _screen_render;
 		Geometry _geometry;
 		TimeScale _timeScale;
 		InputManager _inputManager;
+		Grid _grid;
 	public:
 		AVL(); // Constructor
 		~AVL(); // Destructor
@@ -74,30 +73,18 @@ namespace avl
 		void DrawQueue(const std::queue<int>& q);
 		// Draw Stack
 		void DrawStack(const std::stack<int>& s);
-		// Draw Tree
-		void DrawTree(PointerGridNode* root, Grid _grid);
-		void DrawTree(const std::vector<int>& nodes, Grid _grid);
+		// Draw Tree based on number of desired rows and columns
+		void DrawTree(const std::shared_ptr<TreeNode>& root, int row, int col);
 		// Draw Graph
 		void DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges);
-	private:
-		// Draw tree edges based on grid 	
-		void DrawGridTreeLines(PointerGridNode* root, Grid _grid);
-		// Draw tree nodes based on grid
-		void DrawGridTreeNodes(PointerGridNode* root, Grid _grid);
-		// Calculate which row or column the node will be positioned
-		void CalculateNodeGridPosition(PointerGridNode* root, int row, int column, int treeHeight);
-		// Get tree height
-		int CalculateTreeHeight(PointerGridNode* root);
-		// Convert nodes array to nodes pointer
-		PointerGridNode* ConvertToNodes(const std::vector<int>& nodes, int index = 1);
 	public: // Time management
 		// Manage Execution time
 		sf::Time GetDeltaTime();
 		float GetDeltaTimeAsSeconds();
 		void SetFrameRate(float targetFramerate = 30);
 	public: // Screen grid
-		 Grid CreateGrid(int screenWidth, int screenHeight, GridItemAnchor _itemAnchor, int itemSize = 100);
-		 void ViewGrid(Grid _grid, bool showAnchor, bool viewText = false);
+		 void CreateGrid(int row, int col);
+		 void CreateGrid(int treeHeight);
 	};
 
 	// Constant color values

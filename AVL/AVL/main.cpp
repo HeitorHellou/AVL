@@ -166,63 +166,45 @@ public:
 	}
 };
 
-class BinaryTreeLinkedGridTest : public avl::AVL
+class ExampleBinaryTree : public avl::AVL 
 {
 private:
-	 avl::Grid grid;
-	 PointerGridNode* root;
-public:
-	 virtual void OnUserStart()
-	 {
-		  grid = CreateGrid(screenWidth, screenHeight, avl::Center);
-
-		  root = CreatePointerGridNode(1);
-		  root->left = CreatePointerGridNode(2);
-		  root->left->left = CreatePointerGridNode(3);
-		  root->left->left->left = CreatePointerGridNode(4);
-		  root->left->left->right = CreatePointerGridNode(5);
-		  root->left->right = CreatePointerGridNode(6);
-		  root->left->right->left = CreatePointerGridNode(7);
-		  root->left->right->right = CreatePointerGridNode(8);
-
-		  root->right = CreatePointerGridNode(9);
-		  root->right->left = CreatePointerGridNode(10);
-		  root->right->left->left = CreatePointerGridNode(11);
-		  root->right->left->right = CreatePointerGridNode(12);
-		  root->right->right = CreatePointerGridNode(13);
-		  root->right->right->left = CreatePointerGridNode(14);
-		  root->right->right->right = CreatePointerGridNode(15);
-	 }
-
-	 virtual void OnUserUpdate()
-	 {
-		  Clear(avl::BLACK);
-		  ViewGrid(grid, false);
-		  DrawTree(root, grid);
-	 }
-};
-
-class BinaryTreeSequentialGridTest : public avl::AVL
-{
+	std::shared_ptr<TreeNode> root;
 private:
-	 avl::Grid grid;
-	 std::vector<int> nodes;
-public:
-	 virtual void OnUserStart()
-	 {
-		  grid = CreateGrid(screenWidth, screenHeight, avl::Center);
+	void addNode(int value)
+	{
+		root = insertRecursive(root, value);
+	}
 
-		  nodes = {
-				1, 2, 3, 4, 5, 6, 7, NULL, NULL, 8, 9
-		  };
-	 }
+	std::shared_ptr<TreeNode> insertRecursive(std::shared_ptr<TreeNode> current, int value)
+	{
+		if (current == nullptr) 
+		{
+			return std::make_shared<TreeNode>(value);
+		}
 
-	 virtual void OnUserUpdate()
-	 {
-		  Clear(avl::BLACK);
-		  ViewGrid(grid, false);
-		  DrawTree(nodes, grid);
-	 }
+		if (value < current->data) 
+		{
+			current->left = insertRecursive(current->left, value);
+		}
+		else if (value > current->data) 
+		{
+			current->right = insertRecursive(current->right, value);
+		}
+
+		return current;
+	}
+
+	int getHeight(std::shared_ptr<TreeNode> root) {
+		if (root == nullptr) {
+			return 0;
+		}
+
+		int leftHeight = getHeight(root->left);
+		int rightHeight = getHeight(root->right);
+
+		return std::max(leftHeight, rightHeight) + 1;
+	}
 };
 
 class ExampleQueueAlgorithm : public avl::AVL
