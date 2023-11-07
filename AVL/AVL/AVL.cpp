@@ -301,30 +301,32 @@ void AVL::DrawTree(const std::shared_ptr<TreeNode>& root, int row, int col, int 
     int y = startRow * _grid.getCellHeight();
     int data = root->data;
 
-    DrawTreeNode(x, y, data);
+    int radius = 20;
 
     if (root->left != nullptr)
     {
         int leftX = std::floor((0 + middleCol) / 2) * _grid.getCellWidth();
         int leftY = (startRow + 1) * _grid.getCellHeight();
-        DrawLine(x, y, leftX, leftY);
+        DrawLine(x + radius, y + radius, leftX + radius, leftY + radius);
     }
 
     if (root->right != nullptr)
     {
         int leftX = std::floor(((middleCol + 1) + col) / 2) * _grid.getCellWidth();
         int leftY = (startRow + 1) * _grid.getCellHeight();
-        DrawLine(x, y, leftX, leftY);
+        DrawLine(x + radius, y + radius, leftX + radius, leftY + radius);
     }
+
+    DrawTreeNode(x, y, data, radius);
 
     DrawTree(root->left, row, middleCol, startRow + 1, 0);
     DrawTree(root->right, row, col, startRow + 1, middleCol + 1);
 }
 
-void AVL::DrawTreeNode(int x, int y, int data)
+void AVL::DrawTreeNode(int x, int y, int data, int radius)
 {
-    FillCircle(x, y, 20, avl::WHITE);
-    DrawString(x, y, std::to_string(data), avl::ARIAL, avl::RED, 20);
+    FillCircle(x, y, radius, avl::WHITE);
+    DrawString(x + (radius / 2), y + (radius / 2), std::to_string(data), avl::ARIAL, avl::RED, 20);
 }
 
 void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges) 

@@ -81,7 +81,7 @@ namespace avl
 		// Draw Graph
 		void DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges);
 	private: // Samples Utils
-		void DrawTreeNode(int x, int y, int data);
+		void DrawTreeNode(int x, int y, int data, int radius);
 	public: // Time management
 		// Manage Execution time
 		sf::Time GetDeltaTime();
