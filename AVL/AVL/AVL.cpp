@@ -303,10 +303,22 @@ void AVL::DrawTree(const std::shared_ptr<TreeNode>& root, int row, int col, int 
 
     DrawTreeNode(x, y, data);
 
+    if (root->left != nullptr)
+    {
+        int leftX = std::floor((0 + middleCol) / 2) * _grid.getCellWidth();
+        int leftY = (startRow + 1) * _grid.getCellHeight();
+        DrawLine(x, y, leftX, leftY);
+    }
+
+    if (root->right != nullptr)
+    {
+        int leftX = std::floor(((middleCol + 1) + col) / 2) * _grid.getCellWidth();
+        int leftY = (startRow + 1) * _grid.getCellHeight();
+        DrawLine(x, y, leftX, leftY);
+    }
+
     DrawTree(root->left, row, middleCol, startRow + 1, 0);
-    //DrawTreeLine(x, y, );
     DrawTree(root->right, row, col, startRow + 1, middleCol + 1);
-    //DrawTreeLine(x, y, );
 }
 
 void AVL::DrawTreeNode(int x, int y, int data)
@@ -314,16 +326,6 @@ void AVL::DrawTreeNode(int x, int y, int data)
     FillCircle(x, y, 20, avl::WHITE);
     DrawString(x, y, std::to_string(data), avl::ARIAL, avl::RED, 20);
 }
-
-//void AVL::DrawTreeLine(const std::shared_ptr<TreeNode>& root, int x1, int y1, int x2, int y2)
-//{
-//    if (root == nullptr) {
-//        return;
-//    }
-//
-//    DrawLine(x1, y1, x2, y2);
-//}
-
 
 void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges) 
 {
