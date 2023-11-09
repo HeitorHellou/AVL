@@ -47,10 +47,20 @@ int32_t InputManager::GetMouseWheel() const
 }
 
 // Get Mouse in window space
-//const avl::Vector2f& InputManager::GetMousePosition(const ScreenRender& screen) const {}
+const avl::Vector2f& InputManager::GetMousePosition(const ScreenRender& screen) const 
+{
+	static avl::Vector2f mousePos;
+	mousePos._x = static_cast<float>(sf::Mouse::getPosition(*screen._window).x);
+	mousePos._y = static_cast<float>(sf::Mouse::getPosition(*screen._window).y);
+
+	return mousePos;
+}
 
 // Get Mouse in desktop space
-//const avl::Vector2f InputManager::GetMousePosition() const {}
+const avl::Vector2f InputManager::GetMousePosition() const 
+{
+	return avl::Vector2f(static_cast<float>(sf::Mouse::getPosition().x), static_cast<float>(sf::Mouse::getPosition().y));
+}
 
 // Validate the key value to ensure it's within a valid range
 void InputManager::ValidateKey(Key k) const {
