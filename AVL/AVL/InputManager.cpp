@@ -1,5 +1,5 @@
 #include "InputManager.h"
-#include "ScreenRender.h"
+#include "ScreenRenderer.h"
 
 using namespace avl;
 
@@ -47,7 +47,7 @@ int32_t InputManager::GetMouseWheel() const
 }
 
 // Get Mouse in window space
-const avl::Vector2f& InputManager::GetMousePosition(const ScreenRender& screen) const 
+const avl::Vector2f& InputManager::GetMousePosition(const ScreenRenderer& screen) const 
 {
 	static avl::Vector2f mousePos;
 	mousePos._x = static_cast<float>(sf::Mouse::getPosition(*screen._window).x);

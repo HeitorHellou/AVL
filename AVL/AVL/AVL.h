@@ -5,7 +5,7 @@
 #include <memory>
 #include <cmath>
 
-#include "ScreenRender.h"
+#include "ScreenRenderer.h"
 #include "Vector2D.h"
 #include "Geometry.h"
 #include "TimeScale.h"
@@ -17,7 +17,7 @@ namespace avl
 	class AVL : public Structs
 	{
 	private:
-		ScreenRender _screen_render;
+		ScreenRenderer _screen_renderer;
 		Geometry _geometry;
 		TimeScale _timeScale;
 		InputManager _inputManager;
@@ -27,7 +27,7 @@ namespace avl
 		~AVL(); // Destructor
 	public:
 		// Renders the application window
-		void Render(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
+		void Renderer(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
 		// Starts the application and main game loop
 		void Start(bool showFps = false);
 	public: // User Override Interfaces

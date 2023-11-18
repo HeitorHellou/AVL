@@ -5,7 +5,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include "Vector2D.h"
-#include "ScreenRender.h"
+#include "ScreenRenderer.h"
 #include "AVLExceptions.h";
 
 namespace avl
@@ -29,7 +29,7 @@ namespace avl
 	namespace Mouse
 	{
 		static constexpr int32_t LEFT = 0;
-		static constexpr int32_t RIGTH = 1;
+		static constexpr int32_t RIGHT = 1;
 		static constexpr int32_t MIDDLE = 2;
 	};
 
@@ -67,7 +67,7 @@ namespace avl
 		// Get Mouse Wheel delta
 		int32_t GetMouseWheel() const;
 		// Get Mouse in window space
-		const avl::Vector2f& GetMousePosition(const ScreenRender& screen) const;
+		const avl::Vector2f& GetMousePosition(const ScreenRenderer& screen) const;
 		// Get Mouse in desktop space
 		const avl::Vector2f GetMousePosition() const;
 	private:

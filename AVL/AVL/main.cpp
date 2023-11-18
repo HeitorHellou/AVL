@@ -31,12 +31,12 @@ private:
 			if (arr[j] >= pivot)
 				j--;
 
-			if (i >= j) 
+			if (i >= j)
 				return j;
-			
+
 			drawArray(pivotIndex, i, j, false);
 
-			if (arr[i] >= pivot && arr[j] <= pivot) 
+			if (arr[i] >= pivot && arr[j] <= pivot)
 			{
 				drawArray(pivotIndex, i, j, true);
 				std::swap(arr[i], arr[j]);
@@ -90,7 +90,7 @@ private:
 			quicksort(arr, low, pivotIndex);
 			quicksort(arr, pivotIndex + 1, high);
 		}
-		else 
+		else
 			sortingComplete = true;  // Set the flag to true when sorting is complete
 	}
 
@@ -166,7 +166,7 @@ public:
 	}
 };
 
-class ExampleBinaryTree : public avl::AVL 
+class ExampleBinaryTree : public avl::AVL
 {
 private:
 	std::shared_ptr<TreeNode> root;
@@ -280,20 +280,16 @@ public:
 
 int main()
 {
-	 try 
-	 {
-		 //ExampleQueueAlgorithm demo;
-		 //ExampleStackAlgorithm demo;
-		 //BinaryTreeSequentialGridTest demo;
-		 ExampleBinaryTree demo;
-		 demo.SetFrameRate(60);
-		 demo.Render(screenWidth, screenHeight);
-		 demo.Start(false);
-	 }
-	 catch (const std::exception& e)
-	 {
-		  std::cout << "Exception: " << e.what() << std::endl;
-	 }
-	
+	try
+	{
+		ExampleBinaryTree demo;
+		demo.Renderer(screenWidth, screenHeight);
+		demo.Start(false);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
 	return 0;
 }

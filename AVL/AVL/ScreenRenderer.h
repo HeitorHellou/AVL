@@ -5,7 +5,7 @@
 
 namespace avl
 {
-	class ScreenRender
+	class ScreenRenderer
 	{
 	public:
 		uint32_t _width;
@@ -13,10 +13,10 @@ namespace avl
 		uint32_t _bitsPerPixel;
 		std::unique_ptr<sf::RenderWindow> _window;
 	public:
-		ScreenRender(); // Constructor
-		~ScreenRender(); // Destructor
+		ScreenRenderer(); // Constructor
+		~ScreenRenderer(); // Destructor
 		// Creates the application window
-		void Render(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
+		void Renderer(uint32_t width, uint32_t height, uint32_t bitsPerPixel = 32);
 	public: // Utilities
 		// Returns a vector with the window size
 		Vector2u GetSize();
