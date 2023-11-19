@@ -12,13 +12,16 @@ namespace avl
 		 {
 			 float x;
 			 float y;
-			 int value;
+			 float distance;
+			 int previous;
+			 bool visited;
 		 };
 
 		 struct Edge 
 		 {
 			 int startNode;
 			 int endNode;
+			 int weight;
 		 };
 
 		 // Tree

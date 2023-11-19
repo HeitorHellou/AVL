@@ -352,7 +352,7 @@ void AVL::DrawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edg
         FillCircle(x, y, circleRadius, avl::WHITE);
 
         // Draw the value inside the circle
-        DrawString(x + circleRadius / 2, y + circleRadius / 2, std::to_string(nodes[i].value), avl::ARIAL, avl::RED, 20);
+        DrawString(x + circleRadius / 2, y + circleRadius / 2, std::to_string(i), avl::ARIAL, avl::RED, 20);
     }
 
     Display();

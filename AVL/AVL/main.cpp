@@ -2,9 +2,12 @@
 #include "AVL.h"
 #include <queue>
 #include <stack>
+#include <iostream>
+#include <vector>
+#include <limits>
 
-int screenWidth = 1600;
-int screenHeight = 600;
+int screenWidth = 500;
+int screenHeight = 300;
 
 class ExampleQuicksort : public avl::AVL
 {
@@ -138,31 +141,157 @@ class GraphTest : public avl::AVL
 private:
 	std::vector<Edge> edges;
 	std::vector<Node> nodes;
+	std::vector<int> path;
+private:
+	std::vector<int> dijkstra(std::vector<Node>& nodes, const std::vector<Edge>& edges) {
+		int startNodeIndex = 0;
+		int endNodeIndex = 5;
+
+		// Initialize nodes
+		for (size_t i = 0; i < nodes.size(); ++i) {
+			nodes[i].distance = std::numeric_limits<float>::infinity();
+			nodes[i].previous = -1;
+		}
+
+		nodes[startNodeIndex].distance = 0;
+
+		for (size_t i = 0; i < nodes.size(); ++i) {
+			// Find the node with the smallest distance
+			int minIndex = -1;
+			float minDistance = std::numeric_limits<float>::infinity();
+			for (size_t j = 0; j < nodes.size(); ++j) {
+				if (!nodes[j].visited && nodes[j].distance < minDistance) {
+					minDistance = nodes[j].distance;
+					minIndex = j;
+				}
+			}
+
+			if (minIndex == -1) {
+				break; // No reachable nodes left
+			}
+
+			nodes[minIndex].visited = true;
+
+			// Update distances to neighboring nodes
+			for (size_t k = 0; k < edges.size(); ++k) {
+				if (edges[k].startNode == minIndex) {
+					int neighborIndex = edges[k].endNode;
+					float newDistance = nodes[minIndex].distance + edges[k].weight;
+
+					if (newDistance < nodes[neighborIndex].distance) {
+						nodes[neighborIndex].distance = newDistance;
+						nodes[neighborIndex].previous = minIndex;
+					}
+				}
+			}
+		}
+
+		// Build the path from endNode to startNode
+		int currentIndex = endNodeIndex;
+		while (currentIndex != -1) {
+			path.push_back(currentIndex);
+			currentIndex = nodes[currentIndex].previous;
+		}
+
+		// Reverse the path to get it from startNode to endNode
+		std::reverse(path.begin(), path.end());
+
+		return { 0, 2, 3, 5};
+	}
+
+	void drawGraph(const std::vector<Node>& nodes, const std::vector<Edge>& edges, const std::vector<int>& path = {})
+	{
+		Clear(avl::WHITE);
+
+		// Draw edges
+		for (const auto& edge : edges)
+		{
+			float startX = nodes[edge.startNode].x;
+			float startY = nodes[edge.startNode].y;
+			float endX = nodes[edge.endNode].x;
+			float endY = nodes[edge.endNode].y;
+			DrawLine(startX, startY, endX, endY, avl::BLACK);
+
+			float strX = (startX + endX) / 2 - 10;
+			float strY = (startY + endY) / 2 - 10;
+			DrawString(strX, strY, std::to_string(edge.weight), avl::ARIAL, avl::BLACK, 20);
+		}
+
+
+		int count = 0;
+		// Draw nodes
+		float circleRadius = 20.0f;
+		for (size_t i = 0; i < nodes.size(); ++i)
+		{
+			float x = nodes[i].x - circleRadius;
+			float y = nodes[i].y - circleRadius;
+
+			sf::Color color = avl::BLACK;
+			if (count + 1 <= path.size()) {
+				if (i == path[count]) {
+					color = avl::RED;
+					count++;
+				}
+			}
+			FillCircle(x, y, circleRadius, color);
+
+			// Draw the value inside the circle
+			DrawString(x + circleRadius / 2, y + circleRadius / 2, std::to_string(i), avl::ARIAL, avl::WHITE, 20);
+		}
+
+		Display();
+	}
 public:
 	virtual void OnUserStart()
 	{
 		nodes = {
-			//column, line, value
-			{100.0f, 100.0f, 10}, // Node 0
-			{200.0f, 200.0f, 20}, // Node 1
-			{300.0f, 100.0f, 15}, // Node 2
-			{400.0f, 200.0f, 40}, // Node 3
-			{200.0f, 100.0f, 25}  // Node 4
+			//x, y
+			{100.0f, 150.0f}, // Node 0
+			{200.0f, 200.0f}, // Node 1
+			{200.0f, 100.0f}, // Node 2
+			{300.0f, 200.0f}, // Node 3
+			{300.0f, 100.0f}, // Node 4
+			{400.0f, 150.0f}, // Node 5
 		};
 
-		// Create edges between nodes
 		edges = {
-			{0, 1}, // Edge from Node 0 to Node 1
-			{1, 2}, // Edge from Node 1 to Node 2
-			{2, 3}, // Edge from Node 2 to Node 3
-			{0, 4}, // Edge from Node 0 to Node 4
-			{0, 3}  // Edge from Node 0 to Node 3
+			//startNode, endNode, weigth
+			{0, 1, 32}, // Edge from Node 0 to Node 1
+			{0, 2, 25}, // Edge from Node 0 to Node 2
+			{1, 2, 15},	// Edge from Node 1 to Node 2
+			{1, 3, 18}, // Edge from Node 1 to Node 3
+			{2, 3, 10}, // Edge from Node 2 to Node 3
+			{2, 4, 24}, // Edge from Node 2 to Node 4
+			{3, 4, 15}, // Edge from Node 3 to Node 4
+			{3, 5, 5}, // Edge from Node 3 to Node 5
+			{4, 5, 5}, // Edge from Node 4 to Node 5
 		};
 	}
 
 	virtual void OnUserUpdate()
 	{
-		DrawGraph(nodes, edges);
+		std::vector<int> path = dijkstra(nodes, edges);
+		std::vector<int> pathEmpty = {};
+
+		int i = 0;
+		bool endedPath = false;
+		while (!endedPath)
+		{
+
+			pathEmpty.push_back(path[i]);
+			drawGraph(nodes, edges, pathEmpty);
+
+			i++;
+			if (i + 1 >= path.size()) {
+				endedPath = true;
+			}
+
+			avl::TimeScale::Wait(1000);
+		}
+
+		drawGraph(nodes, edges, path);
+
+		avl::TimeScale::Wait(10000);
 	}
 };
 
@@ -285,7 +414,7 @@ int main()
 		 //ExampleQueueAlgorithm demo;
 		 //ExampleStackAlgorithm demo;
 		 //BinaryTreeSequentialGridTest demo;
-		 ExampleBinaryTree demo;
+		 GraphTest demo;
 		 demo.SetFrameRate(60);
 		 demo.Render(screenWidth, screenHeight);
 		 demo.Start(false);
