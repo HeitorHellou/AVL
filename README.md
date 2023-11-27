@@ -3,7 +3,7 @@
   <h3 align="center">Algorithms Visualization Library</h3>
 
   <p align="center">
-    [A brief description of what this project does and who it's for]
+    A library for demonstrating algorithms visually, in a practical and intuitive way.
     <br />
     <a href="https://github.com/HeitorHellou/AVL/wiki"><strong>Explore the docs »</strong></a>
     <br />
@@ -363,7 +363,7 @@ public:
 
 ## License
 
-Describe license here.
+Open Source license.
 
 ## Authors
 
